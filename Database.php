@@ -6,6 +6,15 @@ class Database {
     private $dbname;
     private $conn;
 
+    // Konstruktor zur Initialisirung von gegebenen Datenbankparameter 
+    public function __construct()
+    {
+        $this->servername = 'localhost';
+        $this->username = 'DAN';
+        $this->password = 'nilspeterpaul';
+        $this->dbname = 'Da_braut_sich_was_zusammen';
+    }
+
     // Konstruktor zur Initialisierung der Datenbankparameter
     public function __construct($servername, $username, $password, $dbname) {
         $this->servername = $servername;
