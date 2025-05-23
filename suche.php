@@ -13,6 +13,10 @@ $suchbegriff = $conn->real_escape_string($_GET['suchbegriff']);
 $sql = "SELECT * FROM Trank WHERE name LIKE '%$suchbegriff%'";
 $result = $conn->query($sql);
 
+// SQL-Abfrage für Item
+$sql = "SELECT * FROM Item WHERE name LIKE '%$suchbegriff%'";
+$result = $conn->query($sql);
+
 // Ergebnisse anzeigen
 if ($result->num_rows > 0) {
     while($row = $result->fetch_assoc()) {
