@@ -57,6 +57,6 @@ class Database {
 // Nutzung der Klasse
 $db = new Database("localhost", "root", "", "meine_datenbank");
 $db->connect();
-$db->getData("meine_tabelle");
+$db->getData("*");
 $db->disconnect();
 ?>
