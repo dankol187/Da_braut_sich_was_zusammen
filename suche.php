@@ -1,6 +1,8 @@
 <?php
 require_once 'Database.php';
-$db->connect();
+$db = new Database();
+$conn = $db->connect();
+
 // Fehlerüberprüfung
 if ($conn->connect_error) {
     die("Verbindung fehlgeschlagen: " . $conn->connect_error);
