@@ -5,9 +5,9 @@ $db = new Database();
 $conn = $db->connect();
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $username = $_POST['Benutzername'];
-    $email = $_POST['E-Mail'];
-    $password = password_hash($_POST['Passwort'], PASSWORD_DEFAULT); // Passwort verschlüsseln
+    $username = $_POST['username'];
+    $email = $_POST['email'];
+    $password = password_hash($_POST['password'], PASSWORD_DEFAULT); // Passwort verschlüsseln
 
     // Überprüfen, ob der Benutzername bereits existiert
     $stmt = $conn->prepare("SELECT id FROM Nutzer WHERE Benutzername = :username");
