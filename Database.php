@@ -33,30 +33,10 @@ class Database {
         echo "Verbindung erfolgreich hergestellt!<br>";
     }
 
-    // Funktion zum Abrufen von Daten
-    public function getData($table) {
-        $sql = "SELECT * FROM " . $table;
-        $result = $this->conn->query($sql);
-
-        if ($result->num_rows > 0) {
-            while($row = $result->fetch_assoc()) {
-                echo "ID: " . $row["id"] . " - Name: " . $row["name"] . "<br>";
-            }
-        } else {
-            echo "Keine Daten gefunden.<br>";
-        }
-    }
-
     // Funktion zum Trennen der Verbindung
     public function disconnect() {
         $this->conn->close();
         echo "Verbindung getrennt.<br>";
     }
 }
-
-// Nutzung der Klasse
-$db = new Database("localhost", "root", "", "meine_datenbank");
-$db->connect();
-$db->getData("*");
-$db->disconnect();
 ?>
