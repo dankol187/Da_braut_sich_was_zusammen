@@ -30,13 +30,13 @@ class Database {
         if ($this->conn->connect_error) {
             die("Verbindung fehlgeschlagen: " . $this->conn->connect_error);
         }
-        echo "Verbindung erfolgreich hergestellt!<br>";
+        return $this->conn;
     }
 
     // Funktion zum Trennen der Verbindung
     public function disconnect() {
         $this->conn->close();
-        echo "Verbindung getrennt.<br>";
+        //echo "Verbindung getrennt.<br>";
     }
 }
 ?>
