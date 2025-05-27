@@ -16,12 +16,12 @@ class Database {
     }
 
     // Konstruktor zur Initialisierung der Datenbankparameter
-    public function __construct($servername, $username, $password, $dbname) {
+   /** public function __construct($servername, $username, $password, $dbname) {
         $this->servername = $servername;
         $this->username = $username;
         $this->password = $password;
         $this->dbname = $dbname;
-    }
+    } */
 
     // Funktion zum Herstellen der Verbindung
     public function connect() {
