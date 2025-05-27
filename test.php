@@ -1,7 +1,7 @@
 <?php
 require_once 'Database.php';
 $db = new Database();
-$db->connect();
+$conn = $db->connect();
 
 
 $sql = "SELECT id, name FROM Item";  // Passe den Tabellennamen an
