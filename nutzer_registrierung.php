@@ -10,7 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $password = password_hash($_POST['password'], PASSWORD_DEFAULT); // Passwort verschlüsseln
 
     // Überprüfen, ob der Benutzername bereits existiert
-    $stmt = $conn->prepare("SELECT id FROM Nutzer WHERE Benutzername = ?");
+    $stmt = $conn->prepare("SELECT * FROM Nutzer WHERE Benutzername = ?");
     $stmt->bind_param("s", $username);
     $stmt->execute();
     if ($stmt->rowCount() > 0) {
