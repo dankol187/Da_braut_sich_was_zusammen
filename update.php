@@ -11,5 +11,5 @@ echo '
 </pre>
 <hr />Last line of the output: ' . $last_line . '
 <hr />Return value: ' . $retval . '
-<hr /><a href="'. $_SERVER['PHP_SELF'] .'">Update</a>';
+<hr /><a href="'. $_SERVER['PHP_SELF'] .'">Test</a>';
 ?>
