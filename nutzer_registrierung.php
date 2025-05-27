@@ -5,19 +5,19 @@ $db = new Database();
 $conn = $db->connect();
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $username = $_POST['username'];
-    $email = $_POST['email'];
-    $password = password_hash($_POST['password'], PASSWORD_DEFAULT); // Passwort verschlüsseln
+    $username = $_POST['Benutzername'];
+    $email = $_POST['E-Mail'];
+    $password = password_hash($_POST['Passwort'], PASSWORD_DEFAULT); // Passwort verschlüsseln
 
     // Überprüfen, ob der Benutzername bereits existiert
-    $stmt = $conn->prepare("SELECT id FROM users WHERE username = :username");
-    $stmt->execute(['username' => $username]);
+    $stmt = $conn->prepare("SELECT id FROM Nutzer WHERE Benutzername = :username");
+    $stmt->execute(['Benutzername' => $username]);
     if ($stmt->rowCount() > 0) {
         echo "Benutzername ist bereits vergeben.";
     } else {
         // Benutzer in die Datenbank einfügen
-        $stmt = $conn->prepare("INSERT INTO users (username, email, password) VALUES (:username, :email, :password)");
-        $stmt->execute(['username' => $username, 'email' => $email, 'password' => $password]);
+        $stmt = $conn->prepare("INSERT INTO Nutzer (Benutzername, E-Mail, Passwort) VALUES (:username, :email, :password)");
+        $stmt->execute(['Benutzername' => $username, 'E-Mail' => $email, 'Passwort' => $password]);
         echo "Registrierung erfolgreich!";
         header("Location: index.php"); // Weiterleitung zur Startseite
             exit();
