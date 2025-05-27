@@ -1,52 +1,55 @@
-<!DOCTYPE html>
-<html lang="de">
-<head>
-    <meta charset="UTF-8">
-    <title>Suchergebnisse</title>
-    <style>
-        body { font-family: Arial, sans-serif; margin: 40px; }
-        .search-bar { margin-bottom: 20px; }
-        .results { margin-top: 20px; }
-        .result-item { border-bottom: 1px solid #ddd; padding: 10px 0; }
-        .no-result { color: #a00; }
-    </style>
-</head>
-<body>
-    <h1>Suche</h1>
-    <form class="search-bar" action="" method="GET">
-        <input type="text" name="query" placeholder="Suchbegriff eingeben" required value="<?php echo isset($_GET['query']) ? htmlspecialchars($_GET['query']) : ''; ?>">
+<?php
+require_once 'Database.php';
+
+// Verbindung zur Datenbank herstellen
+$db = new Database();
+$conn = $db->connect();
+
+$results = [];
+$query = '';
+if (isset($_GET['search'])) {
+    $query = trim($_GET['search']);
+    if ($query !== '') {
+        // In Item suchen
+        $stmt1 = $conn->prepare("SELECT * FROM Item WHERE name LIKE ?");
+        $stmt1->execute(['%' . $query . '%']);
+        $items = $stmt1->fetchAll(PDO::FETCH_ASSOC);
+
+        // In Trank suchen
+        $stmt2 = $conn->prepare("SELECT * FROM Trank WHERE name LIKE ?");
+        $stmt2->execute(['%' . $query . '%']);
+        $tranks = $stmt2->fetchAll(PDO::FETCH_ASSOC);
+
+        // Ergebnisse zusammenführen
+        $results = array_merge($items, $tranks);
+    }
+}
+?>
+
+<?php
+    echo "
+
+    <h1>Datenbank Suche</h1>
+    <form method="GET" action="">
+        <input type="text" name="search" value="<?php echo htmlspecialchars($query); ?>" placeholder="Suchbegriff eingeben" required>
         <button type="submit">Suchen</button>
-    </form>
 
-    <?php
-    // Beispielhafte Ergebnis-Logik
-    $results = [];
-    if (isset($_GET['query'])) {
-        $query = trim($_GET['query']);
-        // Dummy-Ergebnis, als Beispiel. Hier würdest du deine echte Suche einbauen:
-        if ($query === "Beispiel") {
-            $results[] = [
-                'title' => 'Titel des Ergebnisses',
-                'desc' => 'Kurzbeschreibung oder Ausschnitt des Ergebnisses.'
-            ];
-        }
-    }
-
-    if (isset($_GET['query'])) {
-        echo '<div class="results">';
-        if (empty($results)) {
-            echo '<p class="no-result">Kein Ergebnis gefunden.</p>';
-        } else {
-            echo '<h2>Ergebnisse</h2>';
-            foreach ($results as $item) {
-                echo '<div class="result-item">';
-                echo '<strong>' . htmlspecialchars($item['title']) . '</strong>';
-                echo '<p>' . htmlspecialchars($item['desc']) . '</p>';
-                echo '</div>';
-            }
-        }
-        echo '</div>';
-    }
-    ?>
-</body>
-</html>
+    <?php if (isset($_GET['search'])): ?>
+        <h2>Suchergebnisse für "<?php echo htmlspecialchars($query); ?>"</h2>
+        <?php if (empty($results)): ?>
+            <p>Keine Einträge gefunden.</p>
+        <?php else: ?>
+            <ul>
+                <?php foreach ($results as $row): ?>
+                    <li>
+                        <?php
+                        // Zeige am besten Name und ggf. eine ID/Typ an
+                        echo htmlspecialchars($row['name']);
+                        if (isset($row['id'])) echo " (ID: " . intval($row['id']) . ")";
+                        ?>
+                    </li>
+                <?php endforeach; ?>
+            </ul>
+        <?php endif; ?>
+    <?php endif; ?>
+?>
