@@ -7,6 +7,7 @@ $conn = $db->connect();
 
 $results = [];
 $query = '';
+$db->getData("*");
 if (isset($_GET['search'])) {
     $query = trim($_GET['search']);
     if ($query !== '') {
