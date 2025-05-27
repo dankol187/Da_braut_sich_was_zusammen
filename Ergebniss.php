@@ -24,6 +24,7 @@ if (isset($_GET['search'])) {
         $results = array_merge($items, $tranks);
     }
 }
+$db->disconnect();    
 ?>
 
 <?php
