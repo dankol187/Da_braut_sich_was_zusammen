@@ -16,6 +16,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $stmt = $conn->prepare("INSERT INTO users (username, email, password) VALUES (:username, :email, :password)");
         $stmt->execute(['username' => $username, 'email' => $email, 'password' => $password]);
         echo "Registrierung erfolgreich!";
+        header("Location: index.php"); // Weiterleitung zur Startseite
+            exit();
     }
 }
 ?>
