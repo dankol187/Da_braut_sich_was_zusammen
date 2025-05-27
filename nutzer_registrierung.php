@@ -12,8 +12,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Überprüfen, ob der Benutzername bereits existiert
     $stmt = $conn->prepare("SELECT * FROM Nutzer WHERE Benutzername = ?");
     $stmt->bind_param("s", $username);
-    $stmt->execute();
-    if ($stmt->rowCount() > 0) {
+    $result = $stmt->execute();
+    if ($result->rowCount() > 0) {
         echo "Benutzername ist bereits vergeben.";
     } else {
         // Benutzer in die Datenbank einfügen
