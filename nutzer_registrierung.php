@@ -1,5 +1,4 @@
 <?php
-include('db.php');
 require_once 'Database.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
