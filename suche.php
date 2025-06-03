@@ -44,8 +44,12 @@ $db->disconnect();
 
     <?php if (isset($_GET['suchbegriff'])): ?>
         <h2>Suchergebnisse:</h2>
+            <?php if (count($ergebnisse) > 0): ?>
+            <ul>
+                <?php foreach ($ergebnisse as $row): ?>
                     <li>ID: <?php echo $row['id']; ?> - Name: <?php echo htmlspecialchars($row['name']); ?></li>
-            </ul>
+    <?php endforeach; ?>        
+                </ul>
         <?php else: ?>
             <p>Keine Ergebnisse gefunden.</p>
         <?php endif; ?>
