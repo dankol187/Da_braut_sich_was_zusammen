@@ -4,7 +4,7 @@ $db = new Database();
 $conn = $db->connect();
 
 
-$sql = "SELECT id, name FROM Item";  // Passe den Tabellennamen an
+$sql = "SELECT id, name FROM Trank";  // Passe den Tabellennamen an
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
