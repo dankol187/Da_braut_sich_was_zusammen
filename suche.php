@@ -17,7 +17,7 @@ if (isset($_GET['suchbegriff'])) {
     if ($result->num_rows > 0) {
         echo "<ul>";
         while($row = $result->fetch_assoc()) {
-            echo "<li>" . htmlspecialchars($row["titel"]) . "</li>";
+            echo "<li>" . htmlspecialchars($row["name"]) . "</li>";
         }
         echo "</ul>";
     } else {
