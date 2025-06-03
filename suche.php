@@ -41,9 +41,8 @@ $db->disconnect();
         <input type="text" name="suchbegriff" value="<?php echo htmlspecialchars($suchbegriff); ?>" placeholder="Suchbegriff eingeben">
         <button type="submit">Suchen</button>
     </form>
-
+<h2>Suchergebnisse:</h2>
     <?php if (isset($_GET['suchbegriff'])): ?>
-        <h2>Suchergebnisse:</h2>
             <?php if (count($ergebnisse) > 0): ?>
             <ul>
                 <?php foreach ($ergebnisse as $row): ?>
