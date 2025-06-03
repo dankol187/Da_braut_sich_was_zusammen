@@ -10,7 +10,7 @@ $result = $conn->query($sql);
 if ($result->num_rows > 0) {
     // Ausgabe der Daten jeder Zeile
     while($row = $result->fetch_assoc()) {
-        echo "ID: " . $row["id"]. " - Name: " . $row["name"]. "<br>";
+        echo "BrennstoffID: " . $row["BrennstoffID"]. " - Name: " . $row["name"]. "<br>";
     }
 } else {
     echo "0 Ergebnisse";
