@@ -46,7 +46,6 @@ $db->disconnect();
         <h2>Suchergebnisse:</h2>
         <?php if (count($ergebnisse) > 0): ?>
             <ul>
-                <?php foreach ($ergebnisse as $row): ?>
                     <li>ID: <?php echo $row['id']; ?> - Name: <?php echo htmlspecialchars($row['name']); ?></li>
                 <?php endforeach; ?>
             </ul>
