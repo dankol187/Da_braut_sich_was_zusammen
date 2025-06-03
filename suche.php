@@ -29,7 +29,7 @@ $db->disconnect();
             <ul>
                 <?php while ($row = $result->fetch_assoc()): ?>
                     <li>ID: <?php echo $row['id']; ?> - Name: <?php echo htmlspecialchars($row['name']); ?></li>
-    <?php endforeach; ?>        
+    <?php endwhile; ?>        
                 </ul>
         <?php else: ?>
             <p>Keine Ergebnisse gefunden.</p>
