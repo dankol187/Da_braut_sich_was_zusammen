@@ -8,26 +8,51 @@ if ($conn->connect_error) {
     die("Verbindung fehlgeschlagen: " . $conn->connect_error);
 }
 
-// Suchbegriff aus dem Formular holen und gegen SQL-Injection absichern
-$suchbegriff = $conn->real_escape_string($_GET['suchbegriff']);
+if (isset($_GET['suchbegriff'])) {
+    $suchbegriff = $conn->real_escape_string($_GET['suchbegriff']);
+    
+    $sql = "SELECT id, name FROM Item WHERE name LIKE '%$suchbegriff%'";
+    $result = $conn->query($sql);
 
-// SQL-Abfrage für Trank
-$sql = "SELECT * FROM Trank WHERE name LIKE '%$suchbegriff%'";
-$result = $conn->query($sql);
-
-// SQL-Abfrage für Item
-$sql = "SELECT * FROM Item WHERE name LIKE '%$suchbegriff%'";
-$result = $conn->query($sql);
-
-// Ergebnisse anzeigen
-if ($result->num_rows > 0) {
-    while($row = $result->fetch_assoc()) {
-        echo "ID: " . $row["id"] . " - Name: " . $row["name"] . "<br>";
+    if ($result->num_rows > 0) {
+        echo "<ul>";
+        while($row = $result->fetch_assoc()) {
+            echo "<li>" . htmlspecialchars($row["titel"]) . "</li>";
+        }
+        echo "</ul>";
+    } else {
+        echo "Keine Ergebnisse gefunden.";
     }
-} else {
-    echo "Keine Ergebnisse gefunden.";
 }
+
     
 
 $db->disconnect();
 ?>
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Suche</title>
+</head>
+<body>
+    <form method="get" action="suche.php">
+        <input type="text" name="suchbegriff" value="<?php echo htmlspecialchars($suchbegriff); ?>" placeholder="Suchbegriff eingeben">
+        <button type="submit">Suchen</button>
+    </form>
+
+    <?php if (isset($_GET['suchbegriff'])): ?>
+        <h2>Suchergebnisse:</h2>
+        <?php if (count($ergebnisse) > 0): ?>
+            <ul>
+                <?php foreach ($ergebnisse as $row): ?>
+                    <li>ID: <?php echo $row['id']; ?> - Name: <?php echo htmlspecialchars($row['name']); ?></li>
+                <?php endforeach; ?>
+            </ul>
+        <?php else: ?>
+            <p>Keine Ergebnisse gefunden.</p>
+        <?php endif; ?>
+    <?php endif; ?>
+</body>
+</html>
