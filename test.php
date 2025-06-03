@@ -4,7 +4,7 @@ $db = new Database();
 $conn = $db->connect();
 
 
-$sql = "SELECT Brennstoff.ID, name FROM Brennstoff";  // Passe den Tabellennamen an
+$sql = "SELECT Brennstoff.ID FROM Brennstoff";  // Passe den Tabellennamen an
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
