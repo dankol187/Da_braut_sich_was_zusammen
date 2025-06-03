@@ -43,9 +43,9 @@ $db->disconnect();
     </form>
 <h2>Suchergebnisse:</h2>
     <?php if (isset($_GET['suchbegriff'])): ?>
-            <?php if (count($ergebnisse) > 0): ?>
+            <?php if (count($result) > 0): ?>
             <ul>
-                <?php foreach ($ergebnisse as $row): ?>
+                <?php foreach ($result as $row): ?>
                     <li>ID: <?php echo $row['id']; ?> - Name: <?php echo htmlspecialchars($row['name']); ?></li>
     <?php endforeach; ?>        
                 </ul>
