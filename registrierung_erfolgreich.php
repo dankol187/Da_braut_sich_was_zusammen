@@ -1,0 +1,29 @@
+<?php
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Registrierung bestätigt</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        .container { margin: 50px auto; max-width: 400px; padding: 20px; border: 1px solid #ddd; border-radius: 8px; background: #f9f9f9;}
+        .button { margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Registrierung erfolgreich!</h2>
+        <p>Vielen Dank für deine Registrierung.</p>
+        <h3>Deine Daten:</h3>
+        <ul>
+            <li><strong>Name:</strong> <?php echo $name; ?></li>
+            <li><strong>E-Mail:</strong> <?php echo $email; ?></li>
+        </ul>
+        <form action="suche.php" method="get">
+            <button class="button" type="submit">Zurück zur Suche</button>
+        </form>
+    </div>
+</body>
+</html>
+?>
