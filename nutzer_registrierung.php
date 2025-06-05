@@ -18,7 +18,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     } else {
         // Benutzer in die Datenbank einfügen
         $stmt = $conn->prepare("INSERT INTO Nutzer (Benutzername, EMail, Passwort) VALUES (?,?,?)");
-        $stmt->execute("sss",['Benutzername' => $username, 'EMail' => $email, 'Passwort' => $password]);
+        $stmt->bind_param("sss",['Benutzername' => $username, 'EMail' => $email, 'Passwort' => $password]);
+         $stmt->execute();
         echo "Registrierung erfolgreich!";
         header("Location: index.php"); // Weiterleitung zur Startseite
             exit();
