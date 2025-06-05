@@ -14,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $stmt->bind_param("s", $username);
     $stmt->execute();
     $result = $stmt->get_result();
-    if ($result->rowCount() > 0) {
+    if ($result-> num_rows > 0) {
         echo "Benutzername ist bereits vergeben.";
     } else {
         // Benutzer in die Datenbank einfügen
