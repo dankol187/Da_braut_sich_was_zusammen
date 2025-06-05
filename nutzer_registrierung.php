@@ -1,6 +1,5 @@
 <?php
 require_once 'Database.php';
-
 $db = new Database();
 $conn = $db->connect();
 
@@ -18,8 +17,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         echo "Benutzername ist bereits vergeben.";
     } else {
         // Benutzer in die Datenbank einfügen
-        $stmt = $conn->prepare("INSERT INTO Nutzer (Benutzername, E-Mail, Passwort) VALUES (:username, :email, :password)");
-        $stmt->execute(['Benutzername' => $username, 'E-Mail' => $email, 'Passwort' => $password]);
+        $stmt = $conn->prepare("INSERT INTO Nutzer (Benutzername, EMail, Passwort) VALUES (:username, :email, :password)");
+        $stmt->execute(['Benutzername' => $username, 'EMail' => $email, 'Passwort' => $password]);
         echo "Registrierung erfolgreich!";
         header("Location: index.php"); // Weiterleitung zur Startseite
             exit();
