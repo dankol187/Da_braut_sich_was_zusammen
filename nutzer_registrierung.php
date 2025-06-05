@@ -21,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $stmt->bind_param("sss",$username, $email, $password);
          $stmt->execute();
         echo "Registrierung erfolgreich!";
-        header("Location: index.php"); // Weiterleitung zur Startseite
+        header("Location: registrierung_erfolgreich.php"); // Weiterleitung zur Startseite
             exit();
     }
 }
