@@ -25,6 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             exit();
     }
 }
+    $db->disconnect();
 ?>
 
 <form method="POST">
