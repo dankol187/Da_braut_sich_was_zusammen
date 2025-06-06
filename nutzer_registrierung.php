@@ -21,6 +21,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $stmt = $conn->prepare("INSERT INTO Nutzer (Benutzername, EMail, Passwort) VALUES (?,?,?)");
         $stmt->bind_param("sss",$username, $email, $password);
          $stmt->execute();
+        $_SESSION['username'] = $username;
+        $_SESSION['Email'] = $email;
         echo "Registrierung erfolgreich!";
         header("Location: registrierung_erfolgreich.php"); // Weiterleitung zur Startseite
             exit();
