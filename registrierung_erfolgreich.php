@@ -1,6 +1,12 @@
 <?php
-$name = isset($_POST['name']) ? htmlspecialchars($_POST['name']) : '';
-$email = isset($_POST['email']) ? htmlspecialchars($_POST['email']) : '';
+session_start();
+if (!isset($_SESSION['username'])) {
+    // Benutzer ist nicht angemeldet, zur Anmeldung weiterleiten
+    header("Location: nutzer_login.php");
+    exit;
+}
+$name = htmlspecialchars($_POST['username']) : '';
+$email = htmlspecialchars($_POST['email']) : '';
 ?>
 <!DOCTYPE html>
 <html lang="de">
