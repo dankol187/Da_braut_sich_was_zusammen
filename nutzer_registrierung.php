@@ -26,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 }
     $db->disconnect();
-?>
+
 
 <form method="POST">
     Benutzername: <input type="text" name="username" required><br>
