@@ -19,6 +19,11 @@ $name = htmlspecialchars($_SESSION['username']) ;
         .container { margin: 50px auto; max-width: 400px; padding: 20px; border: 1px solid #ddd; border-radius: 8px; background: #f9f9f9;}
         .button { margin-top: 20px; }
     </style>
+    <div style="position:absolute; top:10px; right:10px;">
+    <form action="nutzer_logout.php" method="post">
+        <button type="submit">Abmelden</button>
+    </form>
+</div>
 </head>
 <body>
     <div class="container">
