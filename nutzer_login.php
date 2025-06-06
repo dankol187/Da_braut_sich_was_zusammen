@@ -15,20 +15,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     if ($stmt-> num_rows > 0) {
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
-        
+       else {
+        echo "Benutzername nicht gefunden.";
+    } 
         // Passwort überprüfen
         if (password_verify($password, $user['password'])) {
             // Anmelden und Session setzen
-            $_SESSION['user_id'] = $user['id'];
-            $_SESSION['username'] = $user['username'];
+            $_SESSION['username'] = $user['Benutzername'];
             header("Location: index.php"); // Weiterleitung zur Startseite
             exit();
         } else {
             echo "Falsches Passwort.";
         }
-    } else {
-        echo "Benutzername nicht gefunden.";
-    }
+    } 
 }
     $db ->disconnect();
 ?>
