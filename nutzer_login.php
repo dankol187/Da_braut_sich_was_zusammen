@@ -14,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $result = $stmt->get_result();
 
     if ($stmt-> num_rows > 0) {
-        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+        $user = $stmt->fetch(PDO::FETCH_ASSOC); }
        else {
         echo "Benutzername nicht gefunden.";
     } 
