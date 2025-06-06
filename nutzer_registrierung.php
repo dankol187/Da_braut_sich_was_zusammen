@@ -38,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 <form method="POST">
     Benutzername: <input type="text" name="username" required><br>
-    E-Mail: <input type="email" name="email" required><br>
+    E-Mail: <input type="text" name="email" required><br>
     Passwort: <input type="password" name="password" required><br>
     <button type="submit">Registrieren</button>
 </form>
