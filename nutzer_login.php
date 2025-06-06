@@ -6,7 +6,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $password = $_POST['password'];
 
     // Überprüfen, ob der Benutzername existiert
-    $stmt = $conn->prepare("SELECT Benutzername, Passwort FROM Nutzer WHERE Benutzername = ?");
+    $stmt = $conn->prepare("SELECT Benutzername, Passwort FROM Nutzer WHERE Benutzername = :username");
     $stmt->execute(['username' => $username]);
 
     if ($stmt-> num_rows > 0) {
