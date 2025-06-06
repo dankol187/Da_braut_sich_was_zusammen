@@ -36,3 +36,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 $db->disconnect();
 ?>
+
+<form method="POST" action="nutzer_login.php">
+  Benutzername: <input type="text" name="username" required><br>
+  Passwort: <input type="password" name="password" required><br>
+  <button type="submit">Login</button>
+</form>
