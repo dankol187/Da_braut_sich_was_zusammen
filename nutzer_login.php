@@ -15,9 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     if ($stmt-> num_rows > 0) {
         $user = $stmt->fetch(PDO::FETCH_ASSOC); }
-       else {
-        echo "Benutzername nicht gefunden.";
-    } 
+       
         // Passwort überprüfen
         if (password_verify($password, $user['password'])) {
             // Anmelden und Session setzen
