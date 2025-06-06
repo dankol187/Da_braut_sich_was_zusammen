@@ -10,7 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $password = $_POST['password'];
 
     // Benutzer anhand des Benutzernamens suchen
-    $stmt = $conn->prepare("SELECT ID, Passwort FROM Nutzer WHERE Benutzername = ?");
+    $stmt = $conn->prepare("SELECT Benutzername, Passwort FROM Nutzer WHERE Benutzername = ?");
     $stmt->bind_param("s", $username);
     $stmt->execute();
     $result = $stmt->get_result();
