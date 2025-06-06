@@ -4,6 +4,12 @@ $db = new Database();
 $conn = $db->connect();
 $suchbegriff ="";
 
+session_start();
+if (!isset($_SESSION['username'])) {
+    // Benutzer ist nicht angemeldet, zur Anmeldung weiterleiten
+    header("Location: nutzer_login.php");
+    exit;
+
 if (isset($_GET['suchbegriff'])) {
     $suchbegriff = $conn->real_escape_string($_GET['suchbegriff']);
     
