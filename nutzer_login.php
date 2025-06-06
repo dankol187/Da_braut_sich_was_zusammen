@@ -21,7 +21,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // Passwort überprüfen
         if (password_verify($password, $row['Passwort'])) {
             // Erfolgreich eingeloggt
-            $_SESSION['user_id'] = $row['ID'];
             $_SESSION['username'] = $username;
             echo "Login erfolgreich!";
             header("Location: login_erfolgreich.php"); // Weiterleitung nach Login
