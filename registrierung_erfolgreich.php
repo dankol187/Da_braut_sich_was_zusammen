@@ -34,4 +34,3 @@ $email = htmlspecialchars($_POST['email']) : '';
     </div>
 </body>
 </html>
-?>
