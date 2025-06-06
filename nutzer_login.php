@@ -35,14 +35,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 $db->disconnect();
 ?>
+<div style="position:absolute; top:10px; left:10px;">
+    <form action="nutzer_registrierung.php" method="get">
+        <button type="submit">Registrieren</button>
+    </form>
+</div>
 
 <form method="POST" action="nutzer_login.php">
   Benutzername: <input type="text" name="username" required><br>
   Passwort: <input type="password" name="password" required><br>
   <button type="submit">Login</button>
 </form>
-<div style="position:absolute; top:10px; left:10px;">
-    <form action="nutzer_registrieren.php" method="get">
-        <button type="submit">Registrieren</button>
-    </form>
-</div>
