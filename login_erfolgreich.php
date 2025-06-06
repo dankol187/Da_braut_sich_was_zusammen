@@ -26,4 +26,3 @@ $name = isset($_POST['Benutzername']) ? htmlspecialchars($_POST['name']) : ''
     </div>
 </body>
 </html>
-?>
