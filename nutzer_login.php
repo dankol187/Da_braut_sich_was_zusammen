@@ -24,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $_SESSION['user_id'] = $row['ID'];
             $_SESSION['username'] = $username;
             echo "Login erfolgreich!";
-            header("Location: dashboard.php"); // Weiterleitung nach Login
+            header("Location: login_erfolgreich"); // Weiterleitung nach Login
             exit;
         } else {
             echo "Falsches Passwort.";
