@@ -28,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             echo "Falsches Passwort.";
         }
     } 
-}
+
     $db ->disconnect();
 ?>
 
