@@ -10,7 +10,7 @@ $result = $conn->query($sql);
 if ($result->num_rows > 0) {
     // Ausgabe der Daten jeder Zeile
     while($row = $result->fetch_assoc()) {
-        echo "TrankID: " . $row["TrankID"]. " - Name: " . $row["name"].  " - Art: " . $row["art"]. " - Stufe: " . $row["stufe"]. " - Beschreibung: " . $row["beschreibung"]." - Dauer: " . $row["dauer"]."<br>";
+        echo "TrankID: " . $row["TrankID"]. " - Name: " . $row["Name"].  " - Art: " . $row["Art"]. " - Stufe: " . $row["Stufe"]. " - Beschreibung: " . $row["Beschreibung"]." - Dauer: " . $row["Dauer"]."<br>";
     }
 } else {
     echo "0 Ergebnisse";
