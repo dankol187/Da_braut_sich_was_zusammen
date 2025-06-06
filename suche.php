@@ -26,6 +26,9 @@ $db->disconnect();
 <head>
     <meta charset="UTF-8">
     <title>Suche</title>
+    <form action="logout.php" method="post" style="display:inline;">
+    <button type="submit">Abmelden</button>
+</form>
 </head>
 <body>
     <form method="get" action="suche.php">
