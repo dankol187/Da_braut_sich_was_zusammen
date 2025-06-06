@@ -27,6 +27,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 }
     $db->disconnect();
 ?>
+<div style="position: absolute; top: 10px; right: 10px;">
+    <form action="nutzer_login.php" method="get" style="display:inline;">
+        <button type="submit">Login</button>
+    </form>
+</div>
 
 <form method="POST">
     Benutzername: <input type="text" name="username" required><br>
