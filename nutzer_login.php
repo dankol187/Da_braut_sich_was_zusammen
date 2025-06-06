@@ -41,3 +41,8 @@ $db->disconnect();
   Passwort: <input type="password" name="password" required><br>
   <button type="submit">Login</button>
 </form>
+<div style="position:absolute; top:10px; left:10px;">
+    <form action="registrieren.php" method="get">
+        <button type="submit">Registrieren</button>
+    </form>
+</div>
