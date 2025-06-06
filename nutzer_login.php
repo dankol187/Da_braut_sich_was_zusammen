@@ -35,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 $db->disconnect();
 ?>
-<div style="position:absolute; top:10px; left:10px;">
+<div style="position: absolute; top: 10px; right: 10px;">
     <form action="nutzer_registrierung.php" method="get">
         <button type="submit">Registrieren</button>
     </form>
