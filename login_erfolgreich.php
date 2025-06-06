@@ -1,4 +1,12 @@
 <?php
+session_start();
+if (!isset($_SESSION['username'])) {
+    // Benutzer ist nicht angemeldet, zur Anmeldung weiterleiten
+    header("Location: nutzer_login.php");
+    exit;
+}
+// Benutzername steht jetzt in $_SESSION['username']
+echo "Willkommen, " . htmlspecialchars($_SESSION['username']);
 $name = isset($_POST['Benutzername']) ? htmlspecialchars($_POST['name']) : ''
 ?>
 <!DOCTYPE html>
