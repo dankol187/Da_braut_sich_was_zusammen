@@ -8,8 +8,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $password = $_POST['password'];
 
     // Überprüfen, ob der Benutzername existiert
-    $stmt = $conn->prepare("SELECT Benutzername, Passwort FROM Nutzer WHERE Benutzername = :username");
-    $stmt->execute(['username' => $username]);
+    $stmt = $conn->prepare("SELECT Benutzername, Passwort FROM Nutzer WHERE Benutzername = ?");
+    $stmt->bind_param("s", $username);
+    $stmt->execute();
+    
 
     if ($stmt-> num_rows > 0) {
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
