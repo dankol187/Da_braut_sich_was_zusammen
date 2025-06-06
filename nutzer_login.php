@@ -11,7 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $stmt = $conn->prepare("SELECT Benutzername, Passwort FROM Nutzer WHERE Benutzername = ?");
     $stmt->bind_param("s", $username);
     $stmt->execute();
-    
+    $result = $stmt->get_result();
 
     if ($stmt-> num_rows > 0) {
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
