@@ -2,6 +2,7 @@
 require_once 'Database.php';
 $db = new Database();
 $conn = $db->connect();
+$suchbegriff ="";
 
 if (isset($_GET['suchbegriff'])) {
     $suchbegriff = $conn->real_escape_string($_GET['suchbegriff']);
