@@ -5,8 +5,8 @@ if (!isset($_SESSION['username'])) {
     header("Location: nutzer_login.php");
     exit;
 }
-$name = htmlspecialchars($_POST['username']) : '';
-$email = htmlspecialchars($_POST['email']) : '';
+$name = htmlspecialchars($_SESSION['username']) ;
+$email = htmlspecialchars($_SESSION['email']) ;
 ?>
 <!DOCTYPE html>
 <html lang="de">
