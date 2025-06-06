@@ -1,4 +1,6 @@
 <?php
+session_start(); // Session starten
+
 require_once 'Database.php';
 $db = new Database();
 $conn = $db->connect();
@@ -7,31 +9,30 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-    // Überprüfen, ob der Benutzername existiert
-    $stmt = $conn->prepare("SELECT Benutzername, Passwort FROM Nutzer WHERE Benutzername = ?");
+    // Benutzer anhand des Benutzernamens suchen
+    $stmt = $conn->prepare("SELECT ID, Passwort FROM Nutzer WHERE Benutzername = ?");
     $stmt->bind_param("s", $username);
     $stmt->execute();
     $result = $stmt->get_result();
 
-    if ($stmt-> num_rows > 0) {
-        $user = $stmt->fetch(PDO::FETCH_ASSOC); }
-       
+    // Wenn Benutzer existiert
+    if ($result->num_rows === 1) {
+        $row = $result->fetch_assoc();
         // Passwort überprüfen
-        if (password_verify($password, $user['password'])) {
-            // Anmelden und Session setzen
-            $_SESSION['username'] = $user['Benutzername'];
-            header("Location: index.php"); // Weiterleitung zur Startseite
-            exit();
+        if (password_verify($password, $row['Passwort'])) {
+            // Erfolgreich eingeloggt
+            $_SESSION['user_id'] = $row['ID'];
+            $_SESSION['username'] = $username;
+            echo "Login erfolgreich!";
+            header("Location: dashboard.php"); // Weiterleitung nach Login
+            exit;
         } else {
             echo "Falsches Passwort.";
         }
-    } 
+    } else {
+        echo "Benutzer nicht gefunden.";
+    }
+}
 
-    $db ->disconnect();
+$db->disconnect();
 ?>
-
-<form method="POST">
-    Benutzername: <input type="text" name="username" required><br>
-    Passwort: <input type="password" name="password" required><br>
-    <button type="submit">Einloggen</button>
-</form>
