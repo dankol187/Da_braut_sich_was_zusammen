@@ -1,5 +1,7 @@
 <?php
 require_once 'Database.php';
+$db = new Database();
+$conn = $db->connect();
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $username = $_POST['username'];
@@ -26,6 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         echo "Benutzername nicht gefunden.";
     }
 }
+    $db ->disconnect();
 ?>
 
 <form method="POST">
