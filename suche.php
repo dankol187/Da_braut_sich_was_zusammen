@@ -26,12 +26,13 @@ $db->disconnect();
 <head>
     <meta charset="UTF-8">
     <title>Suche</title>
-   
+   <div style="position:absolute; top:10px; right:10px;">
+    <form action="nutzer_logout.php" method="post">
+        <button type="submit">Abmelden</button>
+    </form>
+</div>
 </head>
 <body>
-     <form action="nutzer_logout.php" method="post" style="display:inline;">
-    <button type="submit">Abmelden</button>
-</form>
     <form method="get" action="suche.php">
         <input type="text" name="suchbegriff" value="<?php echo htmlspecialchars($suchbegriff); ?>" placeholder="Suchbegriff eingeben">
         <button type="submit">Suchen</button>
