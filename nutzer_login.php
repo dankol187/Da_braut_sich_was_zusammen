@@ -42,7 +42,7 @@ $db->disconnect();
   <button type="submit">Login</button>
 </form>
 <div style="position:absolute; top:10px; left:10px;">
-    <form action="registrieren.php" method="get">
+    <form action="nutzer_registrieren.php" method="get">
         <button type="submit">Registrieren</button>
     </form>
 </div>
