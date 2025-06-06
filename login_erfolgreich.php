@@ -7,7 +7,7 @@ if (!isset($_SESSION['username'])) {
 }
 // Benutzername steht jetzt in $_SESSION['username']
 echo "Willkommen, " . htmlspecialchars($_SESSION['username']);
-$name = isset($_POST['Benutzername']) ? htmlspecialchars($_POST['name']) : ''
+$name = isset($_POST['Benutzername']) ? htmlspecialchars($_POST['username']) : ''
 ?>
 <!DOCTYPE html>
 <html lang="de">
