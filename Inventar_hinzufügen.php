@@ -121,9 +121,9 @@ $db->disconnect();
             <input id="Anzahl" name="Anzahl" type="number" min="1" required>
 
             <button type="submit">Hinzufügen</button>
-        </form>
+        </form> 
 
-        <a href="suche.php"><button>Suche</button></a>
+        
         <a href="Inventar_anschauen.php"><button type="button">Zurück zum Inventar</button></a>
 <?php if ($userItemsResult->num_rows > 0): ?>
     <h2>Deine gespeicherten Gegenstände</h2>
@@ -135,6 +135,7 @@ $db->disconnect();
 <?php else: ?>
     <p>Du hast noch keine Gegenstände gespeichert.</p>
 <?php endif; ?>
+        <a href="suche.php"><button>Suche</button></a>
     </div>
 </body>
 </html>
