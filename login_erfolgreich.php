@@ -71,7 +71,7 @@ $name = htmlspecialchars($_SESSION['username']);
             <li><strong>Name:</strong> <?= $name ?></li>
         </ul>
         <form action="suche.php" method="get">
-            <button class="button" type="submit">Zurück zur Suche</button>
+            <button class="button" type="submit">Zur Suche</button>
         </form>
     </div>
 </body>
