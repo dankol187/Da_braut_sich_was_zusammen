@@ -14,18 +14,39 @@ $db = new Database();
 $conn = $db->connect();
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $itemId = (int)$_POST['id']; // <- jetzt passend zum form
+    $itemId = (int)$_POST['id'];
     $menge = (int)$_POST['Anzahl'];
 
     if ($menge <= 0) {
         $msg = "Bitte gib eine gültige Menge an.";
     } else {
-        $stmt = $conn->prepare("ADD INTO hat (hat_Benutzername, hat_ItemID, Anzahl) VALUES (?, ?, ?)");
-        $stmt->bind_param("sii", $username, $itemId, $menge);
-        if ($stmt->execute()) {
-            $msg = "Der Eintrag wurde erfolgreich hinzugefügt.";
+        // Prüfen, ob das Item schon im Inventar ist
+        $stmt = $conn->prepare("SELECT Anzahl FROM hat WHERE hat_Benutzername = ? AND hat_ItemID = ?");
+        $stmt->bind_param("si", $username, $itemId);
+        $stmt->execute();
+        $stmt->bind_result($aktuelleAnzahl);
+        $stmt->fetch();
+        $stmt->close();
+
+        if (isset($aktuelleAnzahl)) {
+            // Item existiert schon: Anzahl addieren und updaten
+            $neueAnzahl = $aktuelleAnzahl + $menge;
+            $stmt = $conn->prepare("UPDATE hat SET Anzahl = ? WHERE hat_Benutzername = ? AND hat_ItemID = ?");
+            $stmt->bind_param("isi", $neueAnzahl, $username, $itemId);
+            if ($stmt->execute()) {
+                $msg = "Die Anzahl wurde erhöht.";
+            } else {
+                $msg = "Daten konnten leider nicht gespeichert werden.";
+            }
         } else {
-            $msg = "Daten konnten leider nicht gespeichert werden.";
+            // Item ist noch nicht im Inventar: neu einfügen
+            $stmt = $conn->prepare("INSERT INTO hat (hat_Benutzername, hat_ItemID, Anzahl) VALUES (?, ?, ?)");
+            $stmt->bind_param("sii", $username, $itemId, $menge);
+            if ($stmt->execute()) {
+                $msg = "Der Eintrag wurde erfolgreich hinzugefügt.";
+            } else {
+                $msg = "Daten konnten leider nicht gespeichert werden.";
+            }
         }
     }
 }
