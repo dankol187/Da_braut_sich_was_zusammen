@@ -2,11 +2,10 @@
 require_once 'Database.php';
 $db = new Database();
 $conn = $db->connect();
-$suchbegriff ="";
+$suchbegriff = "";
 
 session_start();
 if (!isset($_SESSION['username'])) {
-    // Benutzer ist nicht angemeldet, zur Anmeldung weiterleiten
     header("Location: nutzer_login.php");
     exit;
 }
@@ -14,10 +13,9 @@ $username = htmlspecialchars($_SESSION['username']);
 
 if (isset($_GET['suchbegriff'])) {
     $suchbegriff = $conn->real_escape_string($_GET['suchbegriff']);
-
     $sql = "SELECT id, name FROM Item WHERE name LIKE '%$suchbegriff%'";
     $result = $conn->query($sql);
-} 
+}
 $db->disconnect();
 ?>
 <!DOCTYPE html>
@@ -34,19 +32,17 @@ $db->disconnect();
         }
         .container {
             margin: 100px auto;
-            max-width: 500px;
+            max-width: 600px;
             padding: 30px;
             background: #ffffff;
             border-radius: 10px;
             box-shadow: 0 4px 6px -1px #0000001a;
-            text-align: center;
             position: relative;
         }
         form.logout {
             position: fixed;
-            top: 0;
-            right: 0;
-            margin: 20px;
+            top: 10px;
+            right: 10px;
         }
         form.logout button {
             padding: 10px;
@@ -72,36 +68,51 @@ $db->disconnect();
         form[action="suche.php"] button:hover {
             background: #2c5282;
         }
+        .results {
+            margin-top: 20px;
+            text-align: left;
+        }
+        .result-card {
+            padding: 15px;
+            margin-bottom: 10px;
+            background: #f7fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        .result-card strong {
+            color: #2d3748;
+        }
     </style>
 </head>
 <body>
     <form action="nutzer_logout.php" method="post" class="logout">
-        <button type="submit">
-            Abmelden
-        </button>
+        <button type="submit">Abmelden</button>
     </form>
 
     <div class="container">
-        <h1>Willkommen, <?= $username; ?> </h1>
+        <h1>Willkommen, <?= $username; ?></h1>
 
         <form method="get" action="suche.php">
             <input type="text" name="suchbegriff" value="<?= htmlspecialchars($suchbegriff); ?>" placeholder="Suchbegriff eingeben" required>
             <button type="submit">Suchen</button>
         </form>
 
-        <h2>Suchergebnisse:</h2>
-
-        <?php if (isset($result)): ?>
-            <?php if ($result->num_rows > 0): ?>
-                <ul>
+        <div class="results">
+            <h2>Suchergebnisse:</h2>
+            <?php if (isset($result)): ?>
+                <?php if ($result->num_rows > 0): ?>
                     <?php while ($row = $result->fetch_assoc()): ?>
-                        <li>ID: <?= $row['id']; ?> - Name: <?= htmlspecialchars($row['name']); ?></li>
+                        <div class="result-card">
+                            <strong>ID:</strong> <?= $row['id']; ?> <br>
+                            <strong>Name:</strong> <?= htmlspecialchars($row['name']); ?>
+                        </div>
                     <?php endwhile; ?>
-                </ul>
-            <?php else: ?>
-                <p>Keine Ergebnisse gefunden.</p>
+                <?php else: ?>
+                    <p>Keine Ergebnisse gefunden.</p>
+                <?php endif; ?>
             <?php endif; ?>
-        <?php endif; ?>
+        </div>
     </div>
 </body>
 </html>
