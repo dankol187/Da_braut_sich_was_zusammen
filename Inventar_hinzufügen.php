@@ -74,9 +74,35 @@ $db->disconnect();
         button {padding: 10px 20px;background: #3182ce;color: #ffffff;font-size: 1em;border: none;border-radius: 6px;cursor: pointer;}
         button:hover {background: #2c5282;}
         .msg {margin-bottom: 20px;padding: 10px;color: #ffffff;background: #38a169;border-radius: 6px;}
+        .logout-container {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+}
+.logout-btn {
+    padding: 10px 20px;
+    background: #e53e3e;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    font-size: 1em;
+    cursor: pointer;
+    font-weight: bold;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.07);
+    transition: background 0.2s;
+}
+.logout-btn:hover {
+    background: #a60000;
+}
     </style>
 </head>
 <body>
+    <div class="logout-container">
+    <form action="nutzer_logout.php" method="post">
+        <button type="submit" class="logout-btn">Abmelden</button>
+    </form>
+</div>
     <div class="container">
         <h1>Gegenstand auswählen</h1>
         <?php if (isset($msg)): ?>
