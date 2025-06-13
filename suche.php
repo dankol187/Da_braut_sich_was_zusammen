@@ -1,6 +1,24 @@
 <?php
 require_once 'Database.php';
-// rest of the code remains the same
+$db = new Database();
+$conn = $db->connect();
+$suchbegriff ="";
+
+session_start();
+if (!isset($_SESSION['username'])) {
+    // Benutzer ist nicht angemeldet, zur Anmeldung weiterleiten
+    header("Location: nutzer_login.php");
+    exit;
+}
+echo "Willkommen, " . htmlspecialchars($_SESSION['username']);
+
+if (isset($_GET['suchbegriff'])) {
+    $suchbegriff = $conn->real_escape_string($_GET['suchbegriff']);
+    
+    $sql = "SELECT id, name FROM Item WHERE name LIKE '%$suchbegriff%'";
+    $result = $conn->query($sql);
+} 
+$db->disconnect();
 ?>
 <!DOCTYPE html>
 <html lang="de">
