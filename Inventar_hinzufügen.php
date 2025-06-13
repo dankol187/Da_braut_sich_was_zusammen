@@ -32,6 +32,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 // Alle vorhandenen Items aus der Datenbank holen für das Select-Dropdown
 $items = $conn->query("SELECT ID, name FROM Item");
+$userItems = $conn->prepare("SELECT hat.Anzahl, Item.name FROM hat JOIN Item ON hat.hat_ItemID = Item.ID WHERE hat.hat_Benutzername = ?");
+$userItems->bind_param("s", $username);
+$userItems->execute();
+$userItemsResult = $userItems->get_result();
 
 $db->disconnect();
 
@@ -73,6 +77,16 @@ $db->disconnect();
         </form>
 
         <a href="suche.php"><button>Zurück</button></a>
+<?php if ($userItemsResult->num_rows > 0): ?>
+    <h2>Deine gespeicherten Gegenstände</h2>
+    <ul>
+    <?php while ($row = $userItemsResult->fetch_assoc()): ?>
+        <li><?= htmlspecialchars($row['name']) ?>: <?= (int)$row['Anzahl'] ?></li>
+    <?php endwhile; ?>
+    </ul>
+<?php else: ?>
+    <p>Du hast noch keine Gegenstände gespeichert.</p>
+<?php endif; ?>
     </div>
 </body>
 </html>
