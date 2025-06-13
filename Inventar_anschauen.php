@@ -58,6 +58,7 @@ $db->disconnect();
         <?php endif; ?>
         <a href="suche.php" class="button">Suche</a>
         <a href="Inventar_hinzufügen.php" class="button">Gegenstand hinzufügen</a>
+        <a href="Inventar_löschen.php" class="button">Löschen</a>
     </div>
 </body>
 </html>
