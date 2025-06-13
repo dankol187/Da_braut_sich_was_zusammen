@@ -58,16 +58,16 @@ $db->disconnect();
             <div class="msg"><?= htmlspecialchars($msg) ?></div>
         <?php endif; ?>
         <form action="" method="POST">
-            <label for="item_id">Gegenstand:</label>
-            <select name="item_id" id="item_id" required>
+            <label for="id">Gegenstand:</label>
+            <select name="id" id="id" required>
                 <option value="">-- bitte auswählen --</option>
                 <?php while ($item = $items->fetch_assoc()) : ?>
                     <option value="<?= $item['id']; ?>"> <?= htmlspecialchars($item['name']); ?> </option>
                 <?php endwhile; ?>
             </select>
 
-            <label for="menge">Menge:</label>
-            <input id="menge" name="menge" type="number" min="1" required>
+            <label for="Anzahl">Anzahl:</label>
+            <input id="Anzahl" name="Anzahl" type="number" min="1" required>
 
             <button type="submit">Hinzufügen</button>
         </form>
