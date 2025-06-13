@@ -39,36 +39,35 @@ $db->disconnect();
             border-radius: 10px;
             box-shadow: 0 4px 6px -1px #0000001a;
             text-align: center;
+            position: relative;
         }
-        .container form {
-            margin-bottom: 20px;
+        .container form.logout {
+            position: absolute;
+            top: 10px;
+            right: 10px;
         }
-        .container ul {
-            list-style-type: none;
-            padding: 0;
-        }
-        .container ul li {
-            margin-bottom: 10px;
+        .container form.logout button {
             padding: 10px;
-            background: #edf2f7;
-            border-radius: 6px;
-        }
-        .container button {
-            padding: 10px;
-            background: #3182ce;
+            background: #e53e3e;
             color: #ffffff;
             border: none;
             border-radius: 6px;
             font-size: 1em;
             cursor: pointer;
         }
-        .container button:hover {
-            background: #2b6cb0;
+        .container form.logout button:hover {
+            background: #c53030;
         }
     </style>
 </head>
 <body>
     <div class="container">
+        <form action="nutzer_logout.php" method="post" class="logout">
+            <button type="submit">
+                Abmelden
+            </button>
+        </form>
+
         <h1>Willkommen, <?= $username; ?> </h1>
 
         <form method="get" action="suche.php">
@@ -89,12 +88,6 @@ $db->disconnect();
                 <p>Keine Ergebnisse gefunden.</p>
             <?php endif; ?>
         <?php endif; ?>
-
-        <form action="nutzer_logout.php" method="post">
-            <button type="submit" style="margin-top: 20px; background: #e53e3e;">
-                Abmelden
-            </button>
-        </form>
     </div>
 </body>
 </html>
