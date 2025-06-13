@@ -3,7 +3,6 @@
 require_once 'Database.php';
 $db = new Database();
 $conn = $db->connect();
-}
 
 // Angenommen, der Nutzer ist bereits eingeloggt und seine ID ist bekannt.
 // In einer echten Anwendung würdest du $_SESSION verwenden.
