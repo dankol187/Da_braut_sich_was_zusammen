@@ -123,7 +123,7 @@ $db->disconnect();
             <button type="submit">Hinzufügen</button>
         </form> 
         <a href="Inventar_anschauen.php"><button type="button">Zurück zum Inventar</button></a>
-        <br>
+        <br><br> 
          <a href="suche.php"><button>Suche</button></a>
 <?php if ($userItemsResult->num_rows > 0): ?>
     <h2>Deine gespeicherten Gegenstände</h2>
