@@ -151,7 +151,7 @@ $db->disconnect();
                 <?php if ($result->num_rows > 0): ?>
                     <?php while ($row = $result->fetch_assoc()): ?>
                         <div class="result-card">
-                            <strong>ID:</strong> <?= $row['id']; ?> <br>
+                           <!-- <strong>ID:</strong> <?= $row['id']; ?> <br> -->
                             <strong>Name:</strong> <?= htmlspecialchars($row['name']); ?>
                         </div>
                     <?php endwhile; ?>
