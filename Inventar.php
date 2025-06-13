@@ -14,7 +14,7 @@ $db = new Database();
 $conn = $db->connect();
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $itemId = (int)$_POST['item_id']; // Item_ID muss vorhandenen Eintrag referenzieren
+    $itemId = (int)$_POST['id']; // <- jetzt passend zum form
     $menge = (int)$_POST['Anzahl'];
 
     if ($menge <= 0) {
@@ -60,11 +60,11 @@ $db->disconnect();
         <form action="" method="POST">
             <label for="id">Gegenstand:</label>
             <select name="id" id="id" required>
-                <option value="">-- bitte auswählen --</option>
-                <?php while ($item = $items->fetch_assoc()) : ?>
-                    <option value="<?= $item['id']; ?>"> <?= htmlspecialchars($item['name']); ?> </option>
-                <?php endwhile; ?>
-            </select>
+    <option value="">-- bitte auswählen --</option>
+    <?php while ($item = $items->fetch_assoc()) : ?>
+        <option value="<?= $item['ID']; ?>"> <?= htmlspecialchars($item['name']); ?> </option>
+    <?php endwhile; ?>
+</select>
 
             <label for="Anzahl">Anzahl:</label>
             <input id="Anzahl" name="Anzahl" type="number" min="1" required>
