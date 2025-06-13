@@ -40,6 +40,7 @@ $db->disconnect();
         li {margin-bottom: 8px;}
         .empty {color: #e53e3e;}
         a.button {display: inline-block; margin-top: 25px; padding: 10px 20px; background: #3182ce; color: #fff; border-radius: 6px; text-decoration: none;}
+        a.button {display: inline-block; margin-top: 25px; margin-right: 10px; padding: 10px 20px; background: #3182ce; color: #fff; border-radius: 6px; text-decoration: none;}
         a.button:hover {background: #2c5282;}
     </style>
 </head>
@@ -56,6 +57,7 @@ $db->disconnect();
             <p class="empty">Du hast noch keine Gegenstände gespeichert.</p>
         <?php endif; ?>
         <a href="suche.php" class="button">Zurück</a>
+        <a href="Inventar_hinzufügen.php" class="button">Gegenstand hinzufügen</a>
     </div>
 </body>
 </html>
