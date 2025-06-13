@@ -155,9 +155,11 @@ $db->disconnect();
             <?php if (isset($result)): ?>
                 <?php if ($result->num_rows > 0): ?>
                     <?php while ($row = $result->fetch_assoc()): ?>
-                        <div class="result-card">
-                            <strong>Name:</strong> <?= htmlspecialchars($row['name']); ?>
-                        </div>
+                      <div class="result-card">
+    <a href="item_details.php?id=<?= $row['id']; ?>" style="text-decoration:none; color:#3182ce; font-weight:bold;">
+        <?= htmlspecialchars($row['name']); ?>
+    </a>
+</div>  
                     <?php endwhile; ?>
                 <?php else: ?>
                     <p>Keine Ergebnisse gefunden.</p>
