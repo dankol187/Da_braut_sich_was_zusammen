@@ -118,6 +118,7 @@ $db->disconnect();
         <?php else: ?>
             <p>Du hast keine Gegenstände im Inventar.</p>
         <?php endif; ?>
+<a href="Inventar_anschauen.php"><button class="secondary-btn" type="button">Zurück zum Inventar</button></a>
     </div>
 </body>
 </html>
