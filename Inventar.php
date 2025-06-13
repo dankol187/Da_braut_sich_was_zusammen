@@ -31,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 }
 
 // Alle vorhandenen Items aus der Datenbank holen für das Select-Dropdown
-$items = $conn->query("SELECT ItemID, name FROM Item");
+$items = $conn->query("SELECT ID, name FROM Item");
 
 $db->disconnect();
 
