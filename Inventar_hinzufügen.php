@@ -71,7 +71,7 @@ $db->disconnect();
         .container {max-width: 500px; margin: 50px auto;padding: 30px;background: #ffffff;border-radius: 10px;box-shadow: 0 4px 6px -1px #0000001a;}
         form {margin-bottom: 20px;}
         select, input {width: 100%;padding: 10px;margin-bottom: 15px;font-size: 1em;color: #4a5568;border: 1px solid #e2e8f0;border-radius: 6px;}
-        button {padding: 10px 20px;background: #3182ce;color: #ffffff;font-size: 1em;border: none;border-radius: 12px;cursor: pointer;}
+        button {padding: 10px 20px;background: #3182ce;color: #ffffff;font-size: 2em;border: none;border-radius: 6px;cursor: pointer;}
         button:hover {background: #2c5282;}
         .msg {margin-bottom: 20px;padding: 10px;color: #ffffff;background: #38a169;border-radius: 6px;}
         .logout-container {
