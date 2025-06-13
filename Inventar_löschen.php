@@ -139,8 +139,6 @@ $db->disconnect();
             <div class="msg"><?= htmlspecialchars($msg) ?></div>
         <?php endif; ?>
 
-        <a href="suche.php"><button class="secondary-btn" type="button">Suche</button></a>
-
         <?php if ($userItemsResult->num_rows > 0): ?>
             <h2>Dein Inventar</h2>
             <?php while ($row = $userItemsResult->fetch_assoc()): ?>
@@ -168,6 +166,7 @@ $db->disconnect();
         <?php endif; ?>
 
         <a href="Inventar_anschauen.php"><button class="secondary-btn" type="button">Zurück zum Inventar</button></a>
+         <a href="suche.php"><button class="secondary-btn" type="button">Suche</button></a>
     </div>
 </body>
 </html>
