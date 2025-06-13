@@ -42,9 +42,35 @@ $db->disconnect();
         a.button {display: inline-block; margin-top: 25px; padding: 10px 20px; background: #3182ce; color: #fff; border-radius: 6px; text-decoration: none;}
         a.button {display: inline-block; margin-top: 25px; margin-right: 10px; padding: 10px 20px; background: #3182ce; color: #fff; border-radius: 6px; text-decoration: none;}
         a.button:hover {background: #2c5282;}
+        .logout-container {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+}
+.logout-btn {
+    padding: 10px 20px;
+    background: #e53e3e;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    font-size: 1em;
+    cursor: pointer;
+    font-weight: bold;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.07);
+    transition: background 0.2s;
+}
+.logout-btn:hover {
+    background: #a60000;
+}
     </style>
 </head>
 <body>
+    <div class="logout-container">
+    <form action="nutzer_logout.php" method="post">
+        <button type="submit" class="logout-btn">Abmelden</button>
+    </form>
+</div>
     <div class="container">
         <h1>Mein Inventar</h1>
         <?php if ($userItemsResult->num_rows > 0): ?>
