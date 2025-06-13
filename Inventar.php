@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if ($menge <= 0) {
         $msg = "Bitte gib eine gültige Menge an.";
     } else {
-        $stmt = $conn->prepare("REPLACE INTO hat (Benutzername, ID, Anzahl) VALUES (?, ?, ?)");
+        $stmt = $conn->prepare("REPLACE INTO hat (hat_Benutzername, hat_ItemID, Anzahl) VALUES (?, ?, ?)");
         $stmt->bind_param("sii", $username, $itemId, $menge);
         if ($stmt->execute()) {
             $msg = "Der Eintrag wurde erfolgreich hinzugefügt.";
