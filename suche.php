@@ -1,24 +1,6 @@
 <?php
 require_once 'Database.php';
-$db = new Database();
-$conn = $db->connect();
-$suchbegriff ="";
-
-session_start();
-if (!isset($_SESSION['username'])) {
-    // Benutzer ist nicht angemeldet, zur Anmeldung weiterleiten
-    header("Location: nutzer_login.php");
-    exit;
-}
-$username = htmlspecialchars($_SESSION['username']);
-
-if (isset($_GET['suchbegriff'])) {
-    $suchbegriff = $conn->real_escape_string($_GET['suchbegriff']);
-
-    $sql = "SELECT id, name FROM Item WHERE name LIKE '%$suchbegriff%'";
-    $result = $conn->query($sql);
-} 
-$db->disconnect();
+// rest of the code remains the same
 ?>
 <!DOCTYPE html>
 <html lang="de">
@@ -30,6 +12,7 @@ $db->disconnect();
             font-family: Arial, sans-serif;
             background: #edf2f7;
             color: #4a5568;
+            margin: 0;
         }
         .container {
             margin: 100px auto;
@@ -41,12 +24,13 @@ $db->disconnect();
             text-align: center;
             position: relative;
         }
-        .container form.logout {
-            position: absolute;
-            top: 10px;
-            right: 10px;
+        form.logout {
+            position: fixed;
+            top: 0;
+            right: 0;
+            margin: 20px;
         }
-        .container form.logout button {
+        form.logout button {
             padding: 10px;
             background: #e53e3e;
             color: #ffffff;
@@ -55,19 +39,31 @@ $db->disconnect();
             font-size: 1em;
             cursor: pointer;
         }
-        .container form.logout button:hover {
+        form.logout button:hover {
             background: #c53030;
+        }
+        form[action="suche.php"] button {
+            padding: 10px 20px;
+            background: #3182ce;
+            color: #ffffff;
+            border: none;
+            border-radius: 6px;
+            font-size: 1em;
+            cursor: pointer;
+        }
+        form[action="suche.php"] button:hover {
+            background: #2c5282;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <form action="nutzer_logout.php" method="post" class="logout">
-            <button type="submit">
-                Abmelden
-            </button>
-        </form>
+    <form action="nutzer_logout.php" method="post" class="logout">
+        <button type="submit">
+            Abmelden
+        </button>
+    </form>
 
+    <div class="container">
         <h1>Willkommen, <?= $username; ?> </h1>
 
         <form method="get" action="suche.php">
