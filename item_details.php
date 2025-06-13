@@ -47,7 +47,7 @@ $db->disconnect();
         <?php if ($item): ?>
             <div class="details">
                 <div class="detail-row"><span class="label">ID:</span> <?= htmlspecialchars($item['ID']) ?></div>
-                <div class="detail-row"><span class="label">Name:</span> <?= htmlspecialchars($item['name']) ?></div>
+                <div class="detail-row"><span class="label">Name:</span> <?= htmlspecialchars($item['Name']) ?></div>
                 <?php if (!empty($item['beschreibung'])): ?>
                     <div class="detail-row"><span class="label">Beschreibung:</span> <?= nl2br(htmlspecialchars($item['beschreibung'])) ?></div>
                 <?php endif; ?>
