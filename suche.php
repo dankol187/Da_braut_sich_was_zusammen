@@ -10,11 +10,11 @@ if (!isset($_SESSION['username'])) {
     header("Location: nutzer_login.php");
     exit;
 }
-echo "Willkommen, " . htmlspecialchars($_SESSION['username']);
+$username = htmlspecialchars($_SESSION['username']);
 
 if (isset($_GET['suchbegriff'])) {
     $suchbegriff = $conn->real_escape_string($_GET['suchbegriff']);
-    
+
     $sql = "SELECT id, name FROM Item WHERE name LIKE '%$suchbegriff%'";
     $result = $conn->query($sql);
 } 
