@@ -14,48 +14,61 @@ $conn = $db->connect();
 
 // --- POST-Handling ---
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $itemId = (int)$_POST['id'];
-
-    if (isset($_POST['sofort_loeschen'])) {
-        // Direkt löschen
-        $stmt = $conn->prepare("DELETE FROM hat WHERE hat_Benutzername = ? AND hat_ItemID = ?");
-        $stmt->bind_param("si", $username, $itemId);
+    // ALLES LÖSCHEN
+    if (isset($_POST['alles_loeschen'])) {
+        $stmt = $conn->prepare("DELETE FROM hat WHERE hat_Benutzername = ?");
+        $stmt->bind_param("s", $username);
         if ($stmt->execute()) {
-            $msg = "Das Item wurde komplett entfernt.";
+            $msg = "Alle Items wurden aus deinem Inventar entfernt.";
         } else {
-            $msg = "Fehler beim Löschen.";
+            $msg = "Fehler beim Löschen des gesamten Inventars.";
         }
-    } else {
-        // Anzahl verringern
-        $menge = (int)$_POST['Anzahl'];
-        if ($menge <= 0) {
-            $msg = "Bitte gib eine positive Menge an.";
-        } else {
-            $stmt = $conn->prepare("SELECT Anzahl FROM hat WHERE hat_Benutzername = ? AND hat_ItemID = ?");
-            $stmt->bind_param("si", $username, $itemId);
-            $stmt->execute();
-            $stmt->bind_result($aktuelleAnzahl);
-            $stmt->fetch();
-            $stmt->close();
+    }
+    // EINZELN LÖSCHEN
+    else {
+        $itemId = (int)$_POST['id'];
 
-            if (!isset($aktuelleAnzahl)) {
-                $msg = "Dieses Item befindet sich nicht im Inventar.";
-            } elseif ($menge >= $aktuelleAnzahl) {
-                $stmt = $conn->prepare("DELETE FROM hat WHERE hat_Benutzername = ? AND hat_ItemID = ?");
-                $stmt->bind_param("si", $username, $itemId);
-                if ($stmt->execute()) {
-                    $msg = "Das Item wurde komplett entfernt.";
-                } else {
-                    $msg = "Fehler beim Löschen.";
-                }
+        if (isset($_POST['sofort_loeschen'])) {
+            // Direkt löschen
+            $stmt = $conn->prepare("DELETE FROM hat WHERE hat_Benutzername = ? AND hat_ItemID = ?");
+            $stmt->bind_param("si", $username, $itemId);
+            if ($stmt->execute()) {
+                $msg = "Das Item wurde komplett entfernt.";
             } else {
-                $neueAnzahl = $aktuelleAnzahl - $menge;
-                $stmt = $conn->prepare("UPDATE hat SET Anzahl = ? WHERE hat_Benutzername = ? AND hat_ItemID = ?");
-                $stmt->bind_param("isi", $neueAnzahl, $username, $itemId);
-                if ($stmt->execute()) {
-                    $msg = "Die Anzahl wurde verringert.";
+                $msg = "Fehler beim Löschen.";
+            }
+        } else {
+            // Anzahl verringern
+            $menge = (int)$_POST['Anzahl'];
+            if ($menge <= 0) {
+                $msg = "Bitte gib eine positive Menge an.";
+            } else {
+                $stmt = $conn->prepare("SELECT Anzahl FROM hat WHERE hat_Benutzername = ? AND hat_ItemID = ?");
+                $stmt->bind_param("si", $username, $itemId);
+                $stmt->execute();
+                $stmt->bind_result($aktuelleAnzahl);
+                $stmt->fetch();
+                $stmt->close();
+
+                if (!isset($aktuelleAnzahl)) {
+                    $msg = "Dieses Item befindet sich nicht im Inventar.";
+                } elseif ($menge >= $aktuelleAnzahl) {
+                    $stmt = $conn->prepare("DELETE FROM hat WHERE hat_Benutzername = ? AND hat_ItemID = ?");
+                    $stmt->bind_param("si", $username, $itemId);
+                    if ($stmt->execute()) {
+                        $msg = "Das Item wurde komplett entfernt.";
+                    } else {
+                        $msg = "Fehler beim Löschen.";
+                    }
                 } else {
-                    $msg = "Fehler beim Aktualisieren.";
+                    $neueAnzahl = $aktuelleAnzahl - $menge;
+                    $stmt = $conn->prepare("UPDATE hat SET Anzahl = ? WHERE hat_Benutzername = ? AND hat_ItemID = ?");
+                    $stmt->bind_param("isi", $neueAnzahl, $username, $itemId);
+                    if ($stmt->execute()) {
+                        $msg = "Die Anzahl wurde verringert.";
+                    } else {
+                        $msg = "Fehler beim Aktualisieren.";
+                    }
                 }
             }
         }
@@ -89,6 +102,8 @@ $db->disconnect();
         .itemname {font-weight: bold;}
         .sofort-btn {background: #718096; margin-top: 6px;}
         .sofort-btn:hover {background: #4a5568;}
+        .danger-btn {background: #e53e3e; color: #fff; width: 100%; margin-top: 20px;}
+        .danger-btn:hover {background: #a60000;}
     </style>
 </head>
 <body>
@@ -115,10 +130,18 @@ $db->disconnect();
                     <button class="sofort-btn" type="submit" name="sofort_loeschen" value="1">Sofort komplett löschen</button>
                 </form>
             <?php endwhile; ?>
+
+            <!-- Button zum Löschen des gesamten Inventars -->
+            <form action="" method="POST">
+                <button class="danger-btn" name="alles_loeschen" type="submit" onclick="return confirm('Willst du wirklich dein gesamtes Inventar löschen?');">
+                    Gesamtes Inventar löschen
+                </button>
+            </form>
         <?php else: ?>
             <p>Du hast keine Gegenstände im Inventar.</p>
         <?php endif; ?>
-<a href="Inventar_anschauen.php"><button class="secondary-btn" type="button">Zurück zum Inventar</button></a>
+
+        <a href="Inventar_anschauen.php"><button class="secondary-btn" type="button">Zurück zum Inventar</button></a>
     </div>
 </body>
 </html>
