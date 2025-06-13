@@ -24,17 +24,95 @@ $db->disconnect();
     <meta charset="UTF-8">
     <title>Suche</title>
     <style>
-        /* ... dein bestehendes CSS ... */
+        body {
+            font-family: Arial, sans-serif;
+            background: #edf2f7;
+            color: #4a5568;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 500px;
+            margin: 50px auto;
+            padding: 30px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px -1px #0000001a;
+        }
+        h1 {
+            margin-bottom: 20px;
+        }
+        .inventar-btn, .logout-btn {
+            display: inline-block;
+            margin-bottom: 15px;
+            padding: 10px 20px;
+            background: #3182ce;
+            color: #fff;
+            border-radius: 6px;
+            text-decoration: none;
+            border: none;
+            font-size: 1em;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+        .inventar-btn:hover, .logout-btn:hover {
+            background: #2c5282;
+        }
+        form.logout {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+        form.logout button {
+            background: #e53e3e;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            padding: 10px 20px;
+            font-size: 1em;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        form.logout button:hover {
+            background: #a60000;
+        }
+        .search-form {
+            position: relative;
+            display: flex;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+        .search-form input[type="text"] {
+            padding: 10px;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            font-size: 1em;
+            flex: 1;
+        }
+        .search-form button {
+            padding: 10px 20px;
+            background: #3182ce;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            font-size: 1em;
+            cursor: pointer;
+        }
+        .search-form button:hover {
+            background: #2c5282;
+        }
         .autocomplete-list {
             position: absolute;
             z-index: 10;
             background: #fff;
-            border: 1px solid #cbd5e1;
+            border: 1px solid #e2e8f0;
             border-radius: 6px;
             max-height: 200px;
             overflow-y: auto;
             width: 100%;
             box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+            top: 40px;
+            left: 0;
         }
         .autocomplete-item {
             padding: 10px;
@@ -44,8 +122,19 @@ $db->disconnect();
             background: #3182ce;
             color: #fff;
         }
-        .search-form {
-            position: relative;
+        .results {
+            margin-top: 10px;
+            text-align: left;
+        }
+        .result-card {
+            padding: 12px;
+            margin-bottom: 10px;
+            background: #f7fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+        }
+        .result-card strong {
+            color: #2d3748;
         }
     </style>
 </head>
@@ -53,17 +142,14 @@ $db->disconnect();
     <form action="nutzer_logout.php" method="post" class="logout">
         <button type="submit">Abmelden</button>
     </form>
-
     <div class="container">
         <a href="Inventar_anschauen.php" class="inventar-btn">Inventar anschauen</a>
-        <h1>Willkommen, <?= $username; ?></h1>
-
-       <form method="get" action="suche.php" class="search-form" autocomplete="off">
+        <h1>Suche</h1>
+        <form method="get" action="suche.php" class="search-form" autocomplete="off">
             <input type="text" id="suchbegriff" name="suchbegriff" value="<?= htmlspecialchars($suchbegriff); ?>" placeholder="Suchbegriff eingeben" required>
             <div id="autocomplete-list" class="autocomplete-list" style="display:none;"></div>
             <button type="submit">Suchen</button>
         </form>
-        
         <div class="results">
             <h2>Suchergebnisse:</h2>
             <?php if (isset($result)): ?>
