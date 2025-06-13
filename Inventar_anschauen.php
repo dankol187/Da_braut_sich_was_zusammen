@@ -56,7 +56,7 @@ $db->disconnect();
         <?php else: ?>
             <p class="empty">Du hast noch keine Gegenstände gespeichert.</p>
         <?php endif; ?>
-        <a href="suche.php" class="button">Zurück</a>
+        <a href="suche.php" class="button">Suche</a>
         <a href="Inventar_hinzufügen.php" class="button">Gegenstand hinzufügen</a>
     </div>
 </body>
