@@ -2,6 +2,6 @@
 session_start();
 session_unset();
 session_destroy();
-header("Location: nutzer_login.php"); // Weiterleitung zur Login-Seite
+header("Location: logout_erfolgreich.php"); // Weiterleitung zur Login-Seite
 exit();
 ?>
