@@ -83,6 +83,52 @@ $db->disconnect();
         .result-card strong {
             color: #2d3748;
         }
+        .inventar-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background: #38a169;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    font-size: 1em;
+    cursor: pointer;
+    text-decoration: none;
+    margin-bottom: 20px;
+    transition: background 0.2s;
+}
+.inventar-btn:hover {
+    background: #2f855a;
+}
+.search-form {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+.search-form input[type="text"] {
+    padding: 10px;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    font-size: 1em;
+    flex: 1;
+    outline: none;
+    transition: border-color 0.2s;
+}
+.search-form input[type="text"]:focus {
+    border-color: #3182ce;
+}
+.search-form button {
+    padding: 10px 20px;
+    background: #3182ce;
+    color: #ffffff;
+    border: none;
+    border-radius: 6px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+.search-form button:hover {
+    background: #2c5282;
+}
     </style>
 </head>
 <body>
@@ -91,13 +137,14 @@ $db->disconnect();
     </form>
 
     <div class="container">
+        <a href="Inventar_anschauen.php" class="inventar-btn">Inventar anschauen</a>
         <h1>Willkommen, <?= $username; ?></h1>
 
-        <form method="get" action="suche.php">
-            <input type="text" name="suchbegriff" value="<?= htmlspecialchars($suchbegriff); ?>" placeholder="Suchbegriff eingeben" required>
-            <button type="submit">Suchen</button>
-        </form>
-
+       <form method="get" action="suche.php" class="search-form">
+    <input type="text" name="suchbegriff" value="<?= htmlspecialchars($suchbegriff); ?>" placeholder="Suchbegriff eingeben" required>
+    <button type="submit">Suchen</button>
+</form>
+        
         <div class="results">
             <h2>Suchergebnisse:</h2>
             <?php if (isset($result)): ?>
