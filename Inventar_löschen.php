@@ -104,9 +104,35 @@ $db->disconnect();
         .sofort-btn:hover {background: #4a5568;}
         .danger-btn {background: #e53e3e; color: #fff; width: 100%; margin-top: 20px;}
         .danger-btn:hover {background: #a60000;}
+        .logout-container {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+}
+.logout-btn {
+    padding: 10px 20px;
+    background: #e53e3e;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    font-size: 1em;
+    cursor: pointer;
+    font-weight: bold;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.07);
+    transition: background 0.2s;
+}
+.logout-btn:hover {
+    background: #a60000;
+}
     </style>
 </head>
 <body>
+    <div class="logout-container">
+    <form action="nutzer_logout.php" method="post">
+        <button type="submit" class="logout-btn">Abmelden</button>
+    </form>
+</div>
     <div class="container">
         <h1>Gegenstand aus Inventar entfernen</h1>
         <?php if (isset($msg)): ?>
