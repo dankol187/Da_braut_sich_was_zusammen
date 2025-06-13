@@ -76,7 +76,7 @@ $db->disconnect();
             <button type="submit">Hinzufügen</button>
         </form>
 
-        <a href="suche.php"><button>Zurück</button></a>
+        <a href="suche.php"><button>Suche</button></a>
 <?php if ($userItemsResult->num_rows > 0): ?>
     <h2>Deine gespeicherten Gegenstände</h2>
     <ul>
