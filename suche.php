@@ -10,44 +10,91 @@ if (!isset($_SESSION['username'])) {
     header("Location: nutzer_login.php");
     exit;
 }
-echo "Willkommen, " . htmlspecialchars($_SESSION['username']);
+$username = htmlspecialchars($_SESSION['username']);
 
 if (isset($_GET['suchbegriff'])) {
     $suchbegriff = $conn->real_escape_string($_GET['suchbegriff']);
-    
+
     $sql = "SELECT id, name FROM Item WHERE name LIKE '%$suchbegriff%'";
     $result = $conn->query($sql);
 } 
 $db->disconnect();
 ?>
-
 <!DOCTYPE html>
 <html lang="de">
 <head>
     <meta charset="UTF-8">
     <title>Suche</title>
-   <div style="position:absolute; top:10px; right:10px;">
-    <form action="nutzer_logout.php" method="post">
-        <button type="submit">Abmelden</button>
-    </form>
-</div>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #edf2f7;
+            color: #4a5568;
+        }
+        .container {
+            margin: 100px auto;
+            max-width: 500px;
+            padding: 30px;
+            background: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px -1px #0000001a;
+            text-align: center;
+        }
+        .container form {
+            margin-bottom: 20px;
+        }
+        .container ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .container ul li {
+            margin-bottom: 10px;
+            padding: 10px;
+            background: #edf2f7;
+            border-radius: 6px;
+        }
+        .container button {
+            padding: 10px;
+            background: #3182ce;
+            color: #ffffff;
+            border: none;
+            border-radius: 6px;
+            font-size: 1em;
+            cursor: pointer;
+        }
+        .container button:hover {
+            background: #2b6cb0;
+        }
+    </style>
 </head>
 <body>
-    <form method="get" action="suche.php">
-        <input type="text" name="suchbegriff" value="<?php echo htmlspecialchars($suchbegriff); ?>" placeholder="Suchbegriff eingeben">
-        <button type="submit">Suchen</button>
-    </form>
-<h2>Suchergebnisse:</h2>
-    <?php if (isset($_GET['suchbegriff'])): ?>
+    <div class="container">
+        <h1>Willkommen, <?= $username; ?> </h1>
+
+        <form method="get" action="suche.php">
+            <input type="text" name="suchbegriff" value="<?= htmlspecialchars($suchbegriff); ?>" placeholder="Suchbegriff eingeben" required>
+            <button type="submit">Suchen</button>
+        </form>
+
+        <h2>Suchergebnisse:</h2>
+
+        <?php if (isset($result)): ?>
             <?php if ($result->num_rows > 0): ?>
-            <ul>
-                <?php while ($row = $result->fetch_assoc()): ?>
-                    <li>ID: <?php echo $row['id']; ?> - Name: <?php echo htmlspecialchars($row['name']); ?></li>
-    <?php endwhile; ?>        
+                <ul>
+                    <?php while ($row = $result->fetch_assoc()): ?>
+                        <li>ID: <?= $row['id']; ?> - Name: <?= htmlspecialchars($row['name']); ?></li>
+                    <?php endwhile; ?>
                 </ul>
-        <?php else: ?>
-            <p>Keine Ergebnisse gefunden.</p>
+            <?php else: ?>
+                <p>Keine Ergebnisse gefunden.</p>
+            <?php endif; ?>
         <?php endif; ?>
-    <?php endif; ?>
+
+        <form action="nutzer_logout.php" method="post">
+            <button type="submit" style="margin-top: 20px; background: #e53e3e;">
+                Abmelden
+            </button>
+        </form>
+    </div>
 </body>
 </html>
