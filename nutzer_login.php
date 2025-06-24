@@ -1,6 +1,5 @@
 <?php
 session_start();
-
 require_once 'Database.php';
 $db = new Database();
 $conn = $db->connect();
@@ -18,7 +17,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $row = $result->fetch_assoc();
         if (password_verify($password, $row['Passwort'])) {
             $_SESSION['username'] = $username;
-            echo "Login erfolgreich!";
             header("Location: login_erfolgreich.php");
             exit;
         } else {
@@ -37,28 +35,29 @@ $db->disconnect();
 <meta charset="UTF-8">
 <title>Anmeldung</title>
 
-<!-- Minecraft Schriftart -->
-<link href="https://fonts.cdnfonts.com/css/minecraft-4" rel="stylesheet">
+<!-- Minecraft-ähnliche Schriftart mit Groß-/Kleinschreibung -->
+<link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
 
-<!-- Minecraft Sound -->
-<audio id="clickSound" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_9ee2f53d82.mp3" preload="auto"></audio>
+<!-- Minecraft Klicksound -->
+<audio id="clickSound" preload="auto">
+  <source src="https://cdn.pixabay.com/audio/2022/03/15/audio_9ee2f53d82.mp3" type="audio/mpeg">
+</audio>
 
 <style>
 body {
     margin: 0;
     padding: 0;
-    font-family: 'Minecraft', sans-serif;
-    background: url('https://static.planetminecraft.com/files/image/minecraft/texture-pack/2023/579/16923887_1024_texture-pack-grass-block.jpg') repeat;
+    font-family: 'VT323', monospace;
+    background: url('https://i.imgur.com/Vz5bYTI.png') repeat;
     background-size: 64px;
-    color: #fff;
-    overflow: hidden;
+    color: #ffffff;
 }
 
 .container {
     margin: 100px auto;
     max-width: 450px;
     padding: 30px;
-    background: rgba(30, 30, 30, 0.95);
+    background: rgba(20, 20, 20, 0.95);
     border: 4px solid #3c3c3c;
     box-shadow: 0 0 0 4px #000, 0 8px 20px rgba(0, 0, 0, 0.5);
     text-align: center;
@@ -66,10 +65,9 @@ body {
 
 .container h1 {
     margin-bottom: 25px;
-    font-size: 2em;
+    font-size: 36px;
     color: #00ff00;
     text-shadow: 2px 2px #000;
-    text-transform: none;
     letter-spacing: 1px;
 }
 
@@ -78,13 +76,11 @@ body {
     width: 100%;
     margin-bottom: 15px;
     padding: 12px;
-    font-family: 'Minecraft', sans-serif;
-    font-size: 16px;
+    font-size: 20px;
     background: #1a1a1a;
     color: #00ff00;
     border: 2px solid #3c3c3c;
     outline: none;
-    text-transform: none;
 }
 
 .container form input:focus {
@@ -97,11 +93,10 @@ body {
     width: 100%;
     padding: 12px;
     background: #00aa00;
-    color: #fff;
-    font-size: 16px;
+    color: #ffffff;
+    font-size: 20px;
     border: 2px solid #3c3c3c;
     cursor: pointer;
-    font-family: 'Minecraft', sans-serif;
     transition: background 0.2s;
 }
 
@@ -128,65 +123,36 @@ body {
     padding: 10px;
     margin-bottom: 15px;
 }
-
-/* ✨ Pixel Partikel */
-.particle {
-    position: absolute;
-    width: 4px;
-    height: 4px;
-    background: #00ff00;
-    opacity: 0.7;
-    animation: fly 1.2s linear infinite;
-}
-
-@keyframes fly {
-    0% {
-        transform: translateY(0) scale(1);
-        opacity: 1;
-    }
-    100% {
-        transform: translateY(-150px) scale(0.5);
-        opacity: 0;
-    }
-}
 </style>
 </head>
 <body>
-    <!-- ✨ Partikel generieren -->
-    <script>
-    for (let i = 0; i < 30; i++) {
-        let p = document.createElement('div');
-        p.className = 'particle';
-        p.style.left = Math.random() * window.innerWidth + 'px';
-        p.style.top = (window.innerHeight - 50) + 'px';
-        p.style.animationDelay = (Math.random() * 2) + 's';
-        document.body.appendChild(p);
-    }
 
-    // 🔊 Minecraft Sound bei Klick
-    function playSound() {
-        const sound = document.getElementById("clickSound");
+<script>
+function playSound() {
+    const sound = document.getElementById("clickSound");
+    if (sound) {
         sound.currentTime = 0;
-        sound.play();
+        sound.play().catch(err => console.warn("Soundfehler:", err));
     }
-    </script>
+}
+</script>
 
-    <div class="container">
-        <h1>Anmeldung</h1>
+<div class="container">
+    <h1>Anmeldung</h1>
 
-        <?php if (isset($error)): ?>
-            <div class="error"><?= $error; ?></div>
-        <?php endif; ?>
+    <?php if (isset($error)): ?>
+        <div class="error"><?= $error; ?></div>
+    <?php endif; ?>
 
-        <form method="POST" action="nutzer_login.php" onsubmit="playSound()">
-            <input type="text" name="username" placeholder="Benutzername" required>
-            <input type="password" name="password" placeholder="Passwort" required>
-            <button type="submit" onclick="playSound()">Einloggen</button>
-        </form>
+    <form method="POST" action="nutzer_login.php" onsubmit="playSound()">
+        <input type="text" name="username" placeholder="Benutzername" required>
+        <input type="password" name="password" placeholder="Passwort" required>
+        <button type="submit" onclick="playSound()">Einloggen</button>
+    </form>
 
-        <form action="nutzer_registrierung.php" method="get">
-            <button class="register-btn" type="submit" onclick="playSound()">Registrieren</button>
-        </form>
-    </div>
+    <form action="nutzer_registrierung.php" method="get">
+        <button class="register-btn" type="submit" onclick="playSound()">Registrieren</button>
+    </form>
+</div>
 </body>
 </html>
