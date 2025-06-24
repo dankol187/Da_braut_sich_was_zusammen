@@ -60,10 +60,9 @@ $db->disconnect();
         <?php if ($data): ?>
             <?php if (!empty($data['TrankID'])): ?>
                 <div class="details">
-                    <div class="detail-row"><span class="label">TrankID:</span> <?= htmlspecialchars($data['TrankID']) ?></div>
+                    <div class="detail-row"><span class="label">Name:</span> <?= htmlspecialchars($data['TrankName']) ?></div>
                     <div class="detail-row"><span class="label">Art:</span> <?= htmlspecialchars($data['Art']) ?></div>
                     <div class="detail-row"><span class="label">Stufe:</span> <?= htmlspecialchars($data['Stufe']) ?></div>
-                    <div class="detail-row"><span class="label">Name:</span> <?= htmlspecialchars($data['TrankName']) ?></div>
                     <div class="detail-row"><span class="label">Dauer:</span> <?= htmlspecialchars($data['Dauer']) ?></div>
                     <?php if (!empty($data['TrankBeschreibung'])): ?>
                         <div class="detail-row"><span class="label">Beschreibung:</span> <?= nl2br(htmlspecialchars($data['TrankBeschreibung'])) ?></div>
