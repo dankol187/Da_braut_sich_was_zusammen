@@ -19,7 +19,7 @@ $id = (int)$_GET['id'];
 // Join zwischen Item und Trank (LEFT JOIN, falls kein Trank existiert)
 $query = "
     SELECT 
-        Item.ID as ItemID, Item.Name as ItemName, Item.Beschreibung as ItemBeschreibung, 
+        Item.ID as ItemID, Item.Name as ItemName, Beschreibung as ItemBeschreibung, 
         Trank.TrankID, Trank.Art, Trank.Stufe, Trank.Name as TrankName, Trank.Dauer, Trank.Beschreibung as TrankBeschreibung
     FROM Item
     LEFT JOIN Trank ON Item.ID = Trank.ItemID
