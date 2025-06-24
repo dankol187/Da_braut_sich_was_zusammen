@@ -39,156 +39,148 @@ $db->disconnect();
 <html lang="de">
 <head>
 <meta charset="UTF-8">
-<title>Minecraft Login</title>
-<!-- Minecraft-Pixel-Font (alternativ einbinden, wenn möglich) -->
-<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+<title>Login</title>
+<!-- Minecraft-inspirierte, aber moderne Schriftart -->
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap" rel="stylesheet">
 <style>
 body {
-    /* Minecraft Grasblock-Textur als Hintergrund */
-    background: url("https://static.planetminecraft.com/files/image/minecraft/texture-pack/2021/550/14618895-grass-block-top_m.jpg") repeat;
-    color: #222;
-    font-family: 'Press Start 2P', 'Minecraftia', 'Arial', sans-serif;
-    letter-spacing: 1px;
+    margin: 0;
+    min-height: 100vh;
+    font-family: 'Montserrat', Arial, sans-serif;
+    background:
+        linear-gradient(rgba(34,40,49,0.82), rgba(34,40,49,0.96)),
+        url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80') center center/cover no-repeat;
+    color: #e2e2e2;
 }
-.container {
-    margin: 100px auto;
-    max-width: 420px;
-    padding: 30px 30px 20px 30px;
-    /* Minecraft Cobblestone-Block als Textur */
-    background: url('https://static.planetminecraft.com/files/resource_media/screenshot/1211/cobblestone_6505418.jpg') repeat;
+.login-container {
+    max-width: 370px;
+    margin: 90px auto 0 auto;
+    background: rgba(36,54,38,0.97) url('https://i.imgur.com/qTDKS4U.png') repeat;
+    border: 3.5px solid #6c944d;
     border-radius: 16px;
-    box-shadow: 0 0 32px 8px #0009, 0 4px 0 6px #6b6b6b;
-    text-align: center;
-    border: 6px solid #3d652e;
+    box-shadow: 0 8px 32px 4px #222b;
+    padding: 36px 32px 28px 32px;
     position: relative;
 }
-.container:before {
-    /* Pixelart Minecraft-Schwert als Dekoration oben */
-    content: '';
+.login-container::before {
+    content: "";
     display: block;
     position: absolute;
     left: 50%;
-    transform: translateX(-50%);
     top: -64px;
-    width: 64px;
-    height: 64px;
-    background: url('https://static.wikia.nocookie.net/minecraft_gamepedia/images/4/4e/Diamond_Sword_JE3_BE3.png') no-repeat center/contain;
+    transform: translateX(-50%);
+    width: 72px;
+    height: 72px;
+    border-radius: 12px;
+    background: #222 url('https://i.imgur.com/9QX1b9C.png') center/cover no-repeat;
+    border: 3.5px solid #6c944d;
+    box-shadow: 0 2px 14px #222c;
 }
-.container h1 {
-    margin-bottom: 32px;
-    color: #51b13c;
-    text-shadow: 2px 2px #222, 0 0 8px #96e26d;
-    font-size: 1.6em;
+.login-title {
+    font-size: 1.4em;
+    color: #d8eec9;
+    text-shadow: 0 2px 8px #6c944d33;
+    font-weight: 700;
     letter-spacing: 2px;
-    background: #222a;
-    padding: 10px 0;
-    border-radius: 8px;
-    border: 3px solid #7aa24a;
-    box-shadow: 0 0 8px #8ccf61;
+    margin-bottom: 24px;
 }
-.container form input {
-    display: block;
+.login-container form input {
     width: 100%;
     margin-bottom: 18px;
-    padding: 13px 12px;
-    border: 2px solid #7aa24a;
-    background: #d2f7af url('https://static.planetminecraft.com/files/resource_media/screenshot/1211/planks_oak_6505418.jpg') repeat;
-    border-radius: 8px;
+    padding: 12px 12px;
+    border: 2px solid #8eab7d;
+    background: #e6efdd url('https://i.imgur.com/6i1GM6T.png') repeat;
+    border-radius: 7px;
     font-family: inherit;
     font-size: 1em;
-    color: #222;
+    color: #24362a;
     letter-spacing: 1px;
-    box-shadow: 0 2px #3d652e;
+    box-shadow: 0 1.5px #6c944d;
     outline: none;
-    transition: border 0.2s, box-shadow 0.2s;
+    transition: border 0.25s, box-shadow 0.25s;
 }
-.container form input:focus {
-    border: 2px solid #1fa02e;
-    box-shadow: 0 0 8px #51b13c;
+.login-container form input:focus {
+    border: 2.2px solid #6c944d;
+    box-shadow: 0 0 8px #6c944d90;
+    background: #f1faee url('https://i.imgur.com/6i1GM6T.png') repeat;
 }
-.container form button {
+.login-container form button {
     width: 100%;
-    padding: 15px 0;
-    background: #51b13c url('https://static.wikia.nocookie.net/minecraft_gamepedia/images/1/11/Creeper_Face.png') no-repeat 96% center/32px 32px;
-    color: #fff;
-    border: 3px solid #1fa02e;
+    padding: 14px 0;
+    background: linear-gradient(90deg, #567c3b 0%, #8ec07c 100%);
+    color: #f3fff2;
+    border: none;
     border-radius: 8px;
-    font-size: 1.1em;
+    font-size: 1.09em;
     font-family: inherit;
-    letter-spacing: 2px;
-    cursor: pointer;
-    margin-bottom: 6px;
-    box-shadow: 0 2px #3d652e;
-    text-shadow: 1px 1px #222;
-    transition: background 0.2s, box-shadow 0.2s;
-    position: relative;
-}
-.container form button:active {
-    background: #3a8026;
-    box-shadow: 0 0 8px #1fa02e;
-}
-.container .error {
-    color: #e53e3e;
-    margin-bottom: 24px;
-    background: #fff3;
-    border: 2px dashed #e53e3e;
-    border-radius: 7px;
-    padding: 12px;
-    font-size: 0.95em;
     letter-spacing: 1px;
-    box-shadow: 0 0 8px #e53e3e44;
-}
-.register-btn {
-    width: 100%;
-    padding: 13px 0;
-    background: #8b5a2b url('https://static.planetminecraft.com/files/resource_media/screenshot/1211/log_oak_6505418.jpg') repeat;
-    color: #fff;
-    border: 3px solid #ad6c2b;
-    border-radius: 8px;
-    font-size: 1.1em;
-    font-family: inherit;
-    letter-spacing: 2px;
+    font-weight: 600;
+    box-shadow: 0 2px #3d652e;
     cursor: pointer;
-    margin-top: 10px;
-    box-shadow: 0 2px #3e2d19;
-    text-shadow: 1px 1px #222;
-    transition: background 0.2s, box-shadow 0.2s;
-    position: relative;
+    margin-bottom: 8px;
+    transition: background 0.18s, box-shadow 0.18s;
 }
-.register-btn:active {
-    background: #eac16c;
-    color: #222;
-    box-shadow: 0 0 8px #ad6c2b;
+.login-container form button:hover, .login-container form button:focus {
+    background: linear-gradient(90deg, #8ec07c 0%, #567c3b 100%);
+    box-shadow: 0 0 9px #8ec07c88;
 }
-/* Minecraft-typischer Rahmen */
-.container, .container form input, .container form button, .register-btn {
-    image-rendering: pixelated;
+.error {
+    color: #ef4b4b;
+    margin-bottom: 18px;
+    background: #ffededbb;
+    border: 2px solid #d46a6a;
+    border-radius: 6px;
+    padding: 10px;
+    font-size: 0.98em;
+    text-align: left;
+    box-shadow: 0 0 8px #e53e3e22;
 }
-::-webkit-input-placeholder { color: #5d7d4a; opacity: 1; }
-::-moz-placeholder { color: #5d7d4a; opacity: 1; }
-:-ms-input-placeholder { color: #5d7d4a; opacity: 1; }
-::placeholder { color: #5d7d4a; opacity: 1; }
+.register-block {
+    margin-top: 23px;
+    text-align: center;
+}
+.register-block button {
+    width: 100%;
+    padding: 12px 0;
+    background: #2d3e25 url('https://i.imgur.com/uhH1rI2.png') repeat;
+    color: #f3fff2;
+    border: 2px solid #789d5d;
+    border-radius: 8px;
+    font-size: 1.06em;
+    font-family: inherit;
+    letter-spacing: 1px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.18s, border 0.18s;
+}
+.register-block button:hover, .register-block button:focus {
+    background: #8ec07c url('https://i.imgur.com/uhH1rI2.png') repeat;
+    border: 2px solid #6c944d;
+    color: #24362a;
+}
+@media (max-width: 500px) {
+    .login-container {
+        padding: 17px 6vw 22px 6vw;
+        margin-top: 32px;
+    }
+    .login-container::before { width: 54px; height: 54px; top: -38px; }
+}
 </style>
 </head>
 <body>
-    <div class="container">
-        <h1>⛏️ Minecraft Login</h1>
-
+    <div class="login-container">
+        <div class="login-title">Login</div>
         <?php if (isset($error)): ?>
             <div class="error"><?= $error; ?></div>
         <?php endif; ?>
-
         <form method="POST" action="nutzer_login.php">
-            <input type="text" name="username" placeholder="Spielername" required>
-            <input type="password" name="password" placeholder="Passwort (Diamant-geschützt!)" required>
-            <button type="submit">Login <span style="vertical-align: middle;">&#x1F47D;</span></button>
+            <input type="text" name="username" placeholder="Benutzername" required>
+            <input type="password" name="password" placeholder="Passwort" required>
+            <button type="submit">Anmelden</button>
         </form>
-
-        <div style="margin-top: 20px;">
+        <div class="register-block">
             <form action="nutzer_registrierung.php" method="get">
-                <button type="submit" class="register-btn">
-                    <img src="https://static.wikia.nocookie.net/minecraft_gamepedia/images/6/6c/Oak_Planks_JE3_BE3.png" alt="" style="width:18px;vertical-align:middle;margin-right:8px;">Registrieren
-                </button>
+                <button type="submit">Noch keinen Account? Jetzt registrieren</button>
             </form>
         </div>
     </div>
