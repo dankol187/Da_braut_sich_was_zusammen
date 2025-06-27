@@ -49,11 +49,11 @@ $db->disconnect();
 }
 
 body {
-    min-height: 100vh;
+    height: 100vh;
     font-family: 'Press Start 2P', monospace;
     background: linear-gradient(180deg, #87CEEB 0%, #B0E0E6 50%, #87CEFA 100%);
     position: relative;
-    overflow-x: hidden;
+    overflow: hidden;
 }
 
 /* Animated background elements */
@@ -241,7 +241,11 @@ body {
     position: relative;
     z-index: 10;
     max-width: 420px;
-    margin: 80px auto 0;
+    margin: 0 auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     border: 0;
     border-radius: 0;
     box-shadow: 
@@ -249,7 +253,6 @@ body {
         8px 8px 0 2px #1C3A1C,
         16px 16px 20px rgba(0,0,0,0.3);
     padding: 0;
-    position: relative;
     overflow: hidden;
 }
 
@@ -647,7 +650,12 @@ body {
 /* Responsive design */
 @media (max-width: 500px) {
     .login-container {
-        margin: 40px 20px 0;
+        margin: 0 20px;
+        position: relative;
+        top: auto;
+        left: auto;
+        transform: none;
+        margin-top: 50px;
     }
     
     .dirt-section {
@@ -668,44 +676,6 @@ body {
         padding: 12px;
     }
 }
-
-/* Particle effects */
-.particles {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: 5;
-}
-
-.particle {
-    position: absolute;
-    width: 6px;
-    height: 6px;
-    background: 
-        repeating-linear-gradient(
-            0deg,
-            #FFD700 0px,
-            #FFD700 2px,
-            #FFFF00 2px,
-            #FFFF00 4px
-        );
-    background-size: 4px 4px;
-    animation: sparkle 3s infinite;
-}
-
-.particle:nth-child(1) { left: 10%; top: 20%; animation-delay: 0s; }
-.particle:nth-child(2) { left: 80%; top: 30%; animation-delay: 1s; }
-.particle:nth-child(3) { left: 60%; top: 70%; animation-delay: 2s; }
-.particle:nth-child(4) { left: 30%; top: 80%; animation-delay: 0.5s; }
-.particle:nth-child(5) { left: 90%; top: 60%; animation-delay: 1.5s; }
-
-@keyframes sparkle {
-    0%, 100% { opacity: 0; transform: scale(0); }
-    50% { opacity: 1; transform: scale(1); }
-}
 </style>
 </head>
 <body>
@@ -719,15 +689,6 @@ body {
     
     <!-- Grass at bottom -->
     <div class="grass"></div>
-    
-    <!-- Particle effects -->
-    <div class="particles">
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-    </div>
 
     <div class="login-container">
         <!-- Creeper face decoration -->
